@@ -1,32 +1,8 @@
 ﻿@import "../css/base.scss";
 
-.zmiti-index {
+.zmiti-index1 {
     z-index: 1200;
     background: #000;
-
-    @at-root.zmiti-fm{
-        @include pos(a);
-        width: 100px;
-        left: 50px;
-        top: 50px;
-    }
-
-    .zmiti-index-title{
-        @include pos(a);
-        width: 240px;
-        top: 10vh;
-        left: 100px;;
-    }
-
-    .zmiti-text{
-        @include pos(a);
-        color:#fff;
-        width: 400px;
-        right: 40px;
-        text-indent: 2em;
-        top: 30vh;
-        line-height: 60px;;
-    }
 }
 
 .zmiti-time {

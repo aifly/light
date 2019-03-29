@@ -6,6 +6,9 @@ var zmitiUtil = {
 			customid: window.customid
 		}
 	},
+	r(min,max){
+	  return min + Math.random()*(max-min);
+	},
 	getQueryString: function(name) {
 		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
 		var r = window.location.search.substr(1).match(reg);

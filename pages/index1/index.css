@@ -37,33 +37,9 @@
   }
 }
 
-.zmiti-index {
+.zmiti-index1 {
   z-index: 1200;
   background: #000;
-}
-
-.zmiti-fm {
-  position: absolute;
-  width: 100px;
-  left: 50px;
-  top: 50px;
-}
-
-.zmiti-index .zmiti-index-title {
-  position: absolute;
-  width: 240px;
-  top: 10vh;
-  left: 100px;
-}
-
-.zmiti-index .zmiti-text {
-  position: absolute;
-  color: #fff;
-  width: 400px;
-  right: 40px;
-  text-indent: 2em;
-  top: 30vh;
-  line-height: 60px;
 }
 
 .zmiti-time {

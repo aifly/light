@@ -1,78 +1,50 @@
 <template>
-	
-	<div  class="lt-full zmiti-index-main-ui " :style="{background:'url('+imgs.main+') no-repeat center bottom',backgroundSize:'cover'}">
-		<div class="zmiti-zipcode">
-	 		<img :src="imgs.zipcode" alt="">
-	 	</div>
-		<transition name='title'>
-			<div v-if='showTitle' class='zmiti-index-title' >
-				<img :src="imgs.title" alt="">
-				 <div v-tap='[entryMain]' class='zmiti-entry-main flash' :class="{'active':showTitle}">
-				 	<img :src="imgs.begin" alt="">
-				 </div>
-			</div>
-		</transition>
-		 
-	</div>
+	<section v-if='show' class="lt-full zmiti-index" :style="{background:'url('+imgs.index+') no-repeat center bottom',backgroundSize:'cover'}" >
+		<div class='zmiti-fm'>
+			<img :src="imgs.fm" alt="">
+		</div>
 
+		<div class='zmiti-index-title'>
+			<img :src="imgs.title" alt="">
+		</div>
+		<div class='zmiti-text'>
+			{{text}}
+		</div>
+	</section>
 </template>
-
 
 <script>
 	import './index.css';
 	import zmitiUtil from '../lib/util';
+	import Point from '../lib/point';
 	export default {
-		props:['obserable'],
-		name:"zmiti-index-page",
+		props:['width','obserable'],
+		name:'zmitiindex',
 		data(){
 			return{
-				showTitle:false,
-				hiddenLogo:false,
-				showRemark:false,
-				showRemarkPage:false,
 				imgs:window.imgs,
-				secretKey: "e9469538b0623783f38c585821459454",
-                host: window.config.host,
+				viewW:Math.min(window.innerWidth,750),
 				viewH:window.innerHeight,
-				viewW:window.innerWidth,
+				show:true,
+				text:''
 			}
 		},
 		components:{
 		},
 		
 		methods:{
-			
-			entryMain(){
-				this.obserable.trigger({
-					type:'toggleMain',
-					data:{
-						show:true
-					}
-				});
-			},
-			updatePv(){
-				var s = this;
-				axios.post(s.host + '/xhs-security-activity/activity/num/updateNum', {
-						"secretKey": s.secretKey, // 请求秘钥
-						"nm": "meeting2019" // 活动某组图片点赞标识 或者活动某组图片浏览量标识 标识由更新接口定义
-					}).then(function (data) {
-						var dt = data.data;
-						if (typeof dt === 'string') {
-							dt = JSON.parse(dt);
-						}
-						console.log(dt);
-
-					});
-			}
 		},
 		mounted(){
-			
- 			this.updatePv();
+			var iNow = 0;
+			var t = setInterval(()=>{
+				if(iNow>=window.config.text.length){
+					clearInterval(t);
+				}
+				this.text = window.config.text.substring(0,iNow);
+				iNow++;
+			},80);
 
- 			this.obserable.on('showIndexTitle',()=>{
- 				this.showTitle = true;
- 			})
+
 		}
 	}
-
-</script>
+</script>	
