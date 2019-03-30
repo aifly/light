@@ -11,7 +11,7 @@
 <script>
 	document.getElementsByTagName('html')[0].style.fontSize = 750 / 10 + 'px';
 	window.protocol = location.protocol;
-	window.h5name = 'meeting2019';
+	window.h5name = 'light';
 	window.customid = '1697340893'; //改革开放40周年.
 
 	window.baseUrl = window.protocol + '//api.zmiti.com/v2';
@@ -19,7 +19,7 @@
 	window.wxappsecret = '149cdef95c99ff7cab523d8beca86080';
 
 	
-	window.desc = '为英烈点一盏灯';
+	window.desc = '有一群人，他们用生命为我们守护净土；今天，新华FM邀请您一起为英烈点一盏灯';
 	document.addEventListener('touchmove', function (e) {
 		e.preventDefault()
 	}, {
@@ -51,11 +51,11 @@
 			//window.location.href = encodeURI(window.location.href)
 			wx.ready(function () {
 				var config = {
-					title:title||'代表委员喊你来答题！测测你的“科技含金量”',
+					title:title||window.title,
 					desc: desc|| window.desc,
 					//link: encodeURIComponent(window.location.href.split('?')[0].split('#')[0]),
 					link: 'http://h5.zhongguowangshi.com/h5/'+window.h5name+'/index.html',
-					imgUrl: "http://h5.zhongguowangshi.com/h5/"+window.h5name+"/assets/images/301.jpg",
+					imgUrl: "http://h5.zhongguowangshi.com/h5/"+window.h5name+"/assets/images/300.png",
 					error:function(){
 					},
 					success(){
@@ -77,16 +77,16 @@
 		}
 
 		/*
-		loadScript('./assets/js/base.js');
-		loadScript('./assets/js/app.js');
 	
 		*/
+		loadScript('./assets/js/base.js');
+		loadScript('./assets/js/app.js');
 	</script>
 
 	<!-- 
-	 -->
 	<script src='./assets/js/base.js'></script>
 	<script src='http://localhost:4064/app.js' onerror="loadScript('./assets/js/app.js')"></script>
+	 -->
 
 </body>
 

@@ -1,13 +1,17 @@
 <template>
 	<transition name='loading'>
 		<section v-if='show' class="lt-full zmiti-loading1" >
+			<div class='zmiti-fm'>
+				<img :src="imgs.fm" alt="">
+			</div>
 			<div class='zmiti-loading-ui' v-if='!loaded && showLoading' >
+				<div class='zmiti-progress'>
+					<span>为英烈点燃一盏灯</span>{{parseInt(width*100)}}%
+				</div>
 				<div class='zmiti-loading-C'>
 					<div class='zmiti-loading-bar '  :style="{webkitTransform:'scale('+(width)+',1)'}">  </div>
 				</div>
-				<div class='zmiti-progress'>
-					{{parseInt(width*100)}}%
-				</div>
+				
 			</div>
 		</section>
 	</transition>
@@ -55,8 +59,10 @@
 			
 		},
 		mounted(){
+			
 
-			this.obserable.on('hideloading',()=>{
+			
+			this.obserable.on('hideloading1',()=>{
 				this.loaded = true;
 				this.showLoading = false;
 				this.show = false;

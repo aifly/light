@@ -1,4 +1,3 @@
-@charset "UTF-8";
 .lt-full {
   width: 100%;
   height: 100%;
@@ -38,190 +37,16 @@
 }
 
 .zmiti-loading1 {
-  z-index: 1200;
+  z-index: 12100;
   background: #000;
 }
 
-.zmiti-time {
+.zmiti-fm {
   position: absolute;
-  width: 680px;
-  bottom: 160px;
-  left: 35px;
-}
-
-.zmiti-match {
-  width: 300px;
-  position: absolute;
-  z-index: 101;
-  left: 100px;
-}
-
-.zmiti-match img {
-  pointer-events: none;
-}
-
-.zmiti-match .candle-flame {
-  width: 0px;
-  height: 0px;
-  bottom: -90%;
-  left: -85%;
-  right: 0;
-  opacity: 0;
-}
-
-.zmiti-match .candle-flame.active {
-  -webkit-transition: 0.4s 0.1s;
-  transition: 0.4s 0.1s;
-  opacity: 1;
-  width: 30px;
-  height: 60px;
-  -webkit-transform: scale(1);
-  transform: scale(1);
-}
-
-.zmiti-canvas {
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 100;
-}
-
-.candle {
-  position: absolute;
-  bottom: 40px;
-  left: 0;
-  right: 0;
-  width: 40px;
-  margin: auto;
-  z-index: 100;
-}
-
-.candle-body {
-  width: 40px;
-  height: 120px;
-  background-color: #E90018;
-  border-radius: 0 0 40px 40px/0 0 16px 16px;
-  box-shadow: inset 8px 0 12px rgba(0, 0, 0, 0.1), inset -8px 0 12px rgba(0, 0, 0, 0.1);
-  position: relative;
-}
-
-.candle-body::before {
-  content: '';
-  position: absolute;
-  height: 16px;
-  border-radius: 50%;
-  background-color: #EF4D65;
-  top: -8px;
-  left: 0;
-  right: 0;
-  box-shadow: inset 0 0 20px #E90018, inset 0 0 5px rgba(0, 0, 0, 0.2), 0 1px rgba(0, 0, 0, 0.05), inset 0 2px 3px rgba(0, 0, 0, 0.4);
-}
-
-/* 蜡烛芯 */
-.candle-body::after {
-  content: '';
-  display: block;
-  width: 4px;
-  height: 20px;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: -20px;
-  margin: auto;
-  background: #fff;
-  background-image: linear-gradient(to bottom, #311, #edd3d1 70%, #edd3d1);
-  border-radius: 0 0 4px 4px/0 0 2px 2px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
-}
-
-/* 火焰 */
-.candle-flame {
-  -webkit-animation: flicker 3s infinite ease-out alternate;
-  animation: flicker 3s infinite ease-out alternate;
-  background-image: -webkit-radial-gradient(ellipse at 5px 20px, rgba(75, 95, 124, 0), rgba(255, 255, 255, 0.5), #fff);
-  background-image: radial-gradient(ellipse at 5px 20px, rgba(75, 95, 124, 0), rgba(255, 255, 255, 0.5), #fff);
-  border-radius: 37% 37% 34% 34%/70% 70% 33% 33%;
-  box-shadow: 0 -8px 8px 4px #fff, 0 -15px 15px 12px #ff0, 0 -15px 0 14px #f00;
-  width: 10px;
-  height: 20px;
-  position: absolute;
-  bottom: 100%;
-  left: 0;
-  right: 0;
-  top: -24px;
-  margin: auto;
-  transform-origin: center bottom;
-  filter: blur(2px);
-}
-
-.out .candle-flame {
-  display: none;
-}
-
-@-webkit-keyframes flicker {
-  0% {
-    transform: scale(1);
-  }
-  20% {
-    transform: scale(1.1, 0.9) rotate(3deg);
-  }
-  50% {
-    transform: scale(1, 1.2);
-  }
-  80% {
-    transform: scale(0.9, 1.1) rotate(-3deg);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-.candle-smoke {
-  position: absolute;
-  left: 50%;
-  top: -15px;
-  transform-origin: bottom center;
-  transform: scale(0.5);
-  filter: blur(3px);
-  opacity: 0;
-}
-
-.out .candle-smoke {
-  animation: smokeOut 30s both;
-}
-
-@-webkit-keyframes smokeOut {
-  10% {
-    opacity: 1;
-  }
-  0%,
-  100% {
-    opacity: 0;
-  }
-}
-
-.candle-smoke {
-  position: absolute;
-  left: 50%;
-  top: -15px;
-  transform-origin: bottom center;
-  transform: scale(0.5);
-  filter: blur(3px);
-  opacity: 0;
-}
-
-.out .candle-smoke {
-  animation: smokeOut 30s both;
-}
-
-@-webkit-keyframes smokeOut {
-  10% {
-    opacity: 1;
-  }
-  0%,
-  100% {
-    opacity: 0;
-  }
+  width: 100px;
+  left: 50px;
+  top: 50px;
+  z-index: 1004;
 }
 
 .zmiti-loading-icon {
@@ -261,7 +86,7 @@
   height: 300px;
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 40%;
   margin: 0px 0 0 -210px;
 }
 
@@ -275,75 +100,34 @@
 }
 
 .zmiti-loading-ui .zmiti-progress {
-  color: #fff;
+  color: #d1b17a;
   text-align: center;
   margin: 20px 0;
   font-family: Georgia;
   font-size: 40px;
 }
 
-.zmiti-news {
-  background: rgba(255, 255, 255, 0.8);
-  width: 600px;
-  padding: 20px;
-  border-radius: 20px;
-  position: absolute;
-  top: 40%;
-  left: 55px;
-}
-
-.zmiti-news.news-enter-active, .zmiti-news.news-leave-active {
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-}
-
-.zmiti-news.news-enter {
-  opacity: 0;
-  -webkit-transform: scale(0.1) translateY(-200px);
-  transform: scale(0.1) translateY(-200px);
-}
-
-.zmiti-news .zmiti-news-title {
-  display: -webkit-box;
-  -webkit-box-align: center;
-  -webkit-box-pack: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-pack: justify;
-  margin-bottom: 10px;
-}
-
-.zmiti-news .zmiti-news-title img {
-  -webkit-transform: scale(1, 0.8);
-  transform: scale(1, 0.8);
-  width: 50px;
-}
-
-.zmiti-logo {
-  position: absolute;
-  width: 500px;
-  bottom: 40px;
-  left: 50%;
-  margin-left: -250px;
+.zmiti-loading-ui .zmiti-progress span {
+  font-size: 30px;
+  margin-right: 40px;
 }
 
 .zmiti-loading-C {
-  padding: 2px;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 20px;
+  border: 1px solid #d1b17a;
+  padding: 4px;
+  box-sizing: border-box;
 }
 
 .zmiti-loading-bar {
   /*  background-image:repeating-linear-gradient(-45deg, #14c3a2, #14c3a2 30px, #22e8c3 30px, #22e8c3 60px);
      background-size:600px 100%;
      @include animation(barberpole 12s linear infinite); */
-  height: 20px;
+  height: 40px;
   width: 100%;
   -webkit-transform-origin: left;
   transform-origin: left;
-  background: #127fc5;
+  background: #d1b17a;
   position: relative;
-  border-radius: 20px;
-  border-radius: 100px;
 }
 
 .zmiti-loading-bar.active:after,

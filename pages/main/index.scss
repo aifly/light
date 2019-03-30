@@ -1,618 +1,440 @@
 ﻿@import "../css/base.scss";
 
-$baseColor: #fcffb4;
-$viewW: 750px;
-$bgColor: #fcfff8;
-$color: #fffb88;
+.zmiti-index-main-ui {
+    z-index: 1200;
+    background: #000;
+    .zmiti-tip{
+        @include pos(a);
+        top: 650px;
+        width: 300px;
+        left: 50%;
+        margin-left: -150px;;
+        &.tip-enter-active,
+        &.tip-leave-active {
+            @include transition(0.4s);
+        }
 
-.zmiti-main-ui {
-    
-    &.main-enter-active,
-    &.main-leave-active {
-        @include transition(.4s);
+        &.tip-leave-to,
+        &.tip-enter {
+            opacity: 0;
+        }
+    }
+    .candle {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 150px;
+        z-index: 1003;
+        &.candle-enter-active,
+        &.candle-leave-active {
+            @include transition(0.4s);
+        }
+
+        &.candle-leave-to,
+        &.candle-enter {
+            opacity: 0;
+            //@include transform(translateY(400px));
+        }
+
+        .zmiti-candle-body {
+            width: 150px;
+        }
     }
 
+    /* 火焰 */
+    .candle-flame {
+        @include animation(flicker 3s infinite ease-out alternate);
 
-    &.main-leave-to,
-    &.main-enter {
+        background-image: -webkit-radial-gradient(ellipse at 5px 20px, rgba(75, 95, 124, 0), hsla(0, 0%, 100%, 0.5), #fff);
+        background-image: radial-gradient(ellipse at 5px 20px, rgba(75, 95, 124, 0), hsla(0, 0%, 100%, 0.5), #fff);
+        border-radius: 37% 37% 34% 34%/70% 70% 33% 33%;
+        box-shadow: 0 -8px 8px 4px #fff, 0 -15px 15px 12px #ff0, 0 -15px 0 14px #f00;
+        width: 40px;
+        height: 80px;
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        right: 0;
+        top: -24px;
+        margin: auto;
+        transform-origin: center bottom;
+        filter: blur(3px);
+    }
+    .zmiti-share-page{
+        z-index: 99;
+        opacity:0;
+        top: 0;
+        position: fixed !important;
+        &.hideShadow{
+            &::before{
+                display:none;
+            }
+        }
+        &.active{
+            @include transition(.5s .5s);
+            opacity:1;
+             .lt-full {
+                @include animation(opacity 3s .6s linear forwards);
+             }
+             &::before{
+                @include animation(light 4s .6s linear forwards);
+             }
+        }
+        &:before {
+            content: '';
+            @include pos(f);
+            width: 100%;
+            height: 100%;
+
+            z-index: 10001;
+
+
+            background: rgba(0, 0, 0, 0.9);
+
+            background-image: -webkit-radial-gradient(rgba(225, 225, 225, 0.1), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 1));
+
+            
+        }
+        .lt-full{   
+            opacity:0;
+            z-index:101;
+            img{
+                width: auto;
+                height: 100%;
+                @include pos(a);
+                left:50%;
+                top: 50%;
+                @include transform(translate(-50%,-50%));
+
+            }
+        }
+
+        .zmiti-share-title{
+             width: 240px;
+             top: 10vh;
+             left: 100px;
+             @include pos(a);
+        }
+        .zmiti-share-text{
+            @include pos(a);
+            width: 400px;
+            right: 20px;
+            top: 23vh;
+
+        }
+        .zmiti-share-audio{
+            @include pos(a);
+            width: 70px;
+            top: 200px;
+            right: 100px;
+
+        }
+        .zmiti-qrcode{
+            @include pos(a);
+            right: 20px;
+            bottom:20px;
+        }
+        .zmiti-share-pv{
+            color:#643013;
+            font-weight: bold;
+            @include pos(a);
+            bottom:40px;
+            left: 40px;
+            font-size:34px;
+            z-index: 10;;
+            span{
+                font-family: Georgia;
+                font-size:50px;
+            }
+        }
+    }
+
+    @-webkit-keyframes light {
+        80% {
+           @include transform(translate3d(0, 0, 10px) scale(10));
+           
+        }
+        100%{
+            @include transform(translate3d(0, 0, 10px) scale(10));
+            opacity: 0;
+        }
+    }
+    @-webkit-keyframes opacity {
+        to {
+            opacity: 1;
+        }
+    }
+    .out .candle-flame {
+        display: none;
+    }
+
+    @-webkit-keyframes flicker {
+        0% {
+            transform: scale(1);
+        }
+
+        20% {
+            transform: scale(1.1, 0.9) rotate(3deg);
+        }
+
+        50% {
+            transform: scale(1, 1.2);
+        }
+
+        80% {
+            transform: scale(0.9, 1.1) rotate(-3deg);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+   .zmiti-createimg{
+       background: #d1b17a;
+      
+       @include transformOrigin(center 30%);
+       z-index: 1200;
+       height: auto;
+       padding-bottom: 30px;
+       @include transform(scale(1));
+       left: 15%;
+       top: 12%;
+       border:1px solid rgba(96, 43, 14, .1);
+       text-align: center;
+        &.createimg-enter-active{
+            @include transition(.4s);
+        }
+
+        &.createimg-leave-to,
+        &.createimg-enter {
+            width: 750px;
+            height: 1000px;
+            @include transform(scale(1.1));
+            //@include transform(translateY(400px));
+        }
+
+        .zmiti-create-tip{
+            @include pos(a);
+            width: 30px;
+            bottom: 0;
+            left: 100%;
+            color:#fff;
+            font-size:24px;
+        }
+
+       &>div{
+           @include displayBox(horizontal);
+           
+           &>div{
+               width: 200px;
+               margin: 0 20px;
+               height: 70px;
+               line-height: 70px;
+               font-size:26px;
+               &:nth-of-type(1){
+                   background:#fff;
+               }
+               &:nth-of-type(2) {
+                   background:-webkit-linear-gradient(top, #c08b6b, #7c3f24);
+                   color:#fff;
+               }
+           }
+       }
+
+       .zmiti-img{
+           @include transform(scale(.96));
+           @include pos(r);
+           box-shadow: 0 0 10px rgba(96, 43, 14, .7) ;
+           
+       }
+
+       img{
+           @include pos(r);
+           z-index: 11;
+       }
+   }
+
+    .out .candle-smoke {
+        animation: smokeOut 30s both;
+    }
+
+    @-webkit-keyframes smokeOut {
+        10% {
+            opacity: 1;
+        }
+
+        0%,
+        100% {
+            opacity: 0;
+        }
+    }
+
+    .candle-smoke {
+        position: absolute;
+        left: 50%;
+        top: -15px;
+        transform-origin: bottom center;
+        transform: scale(0.5);
+        filter: blur(3px);
         opacity: 0;
     }
 
+    .out .candle-smoke {
+        animation: smokeOut 30s both;
+    }
 
-    @include transform3d;
+    @-webkit-keyframes smokeOut {
+        10% {
+            opacity: 1;
+        }
 
-    width: $viewW !important;
+        0%,
+        100% {
+            opacity: 0;
+        }
+    }
+}
+
+.zmiti-time {
+    @include pos(a);
+
+    width: 680px;
+    bottom: 160px;
+    left: 35px;
+}
+
+.zmiti-match {
+    width: 300px;
+
+    &.transition{
+        @include transition(.4s);
+    }
+    &.match-enter-active,
+    &.match-leave-active {
+        @include transition(0.4s .4s);
+    }
+
+    &.match-leave-to,
+    &.match-enter {
+        opacity: 0;
+    }
+    @include pos(a);
+
+    z-index: 101;
+    left: 100px;
+
+    img {
+        pointer-events: none;
+    }
+
+    .candle-flame {
+        width: 0px;
+        height: 0px;
+        bottom: -90%;
+        left: -85%;
+        right: 0;
+        opacity: 0;
+
+        &.active {
+            @include transition(0.4s 0.1s);
+
+            opacity: 1;
+            width: 30px;
+            height: 60px;
+
+            @include transform(scale(1));
+        }
+    }
+}
+
+.zmiti-canvas {
+    @include pos(a);
+
     left: 0;
     top: 0;
-    overflow: hidden;
-    background: #fff;
-
-
-    .zmiti-team-page{
-        @include displayBox(horizontal);
-
-        z-index: 102;
-        div{
-            @include transform(scale(.9));
-        }
-    }
-
-    @at-root.zmiti-h5-title{
-        @include pos(a);
-        width: 156px;
-        left: 30px;
-        top: 30px;
-        z-index: 1012;
-    }
-    &.show {
-        @include transition(.5s);
-        z-index: 270;
-        opacity: 1;
-    }
-
-    @include displayBox(horizontal);
-
-    z-index: -1;
-    opacity: 0;
-    
-
-    .zmiti-question-ui{
-
-       /*  &.questionui-enter-active,
-        &.questionui-leave-active {
-            @include transition(.4s);
-        }
-        
-        &.questionui-leave-to{
-            opacity: 0;
-            @include transform(translate3d(0,-80vh,0));
-        } */
-    }
-    .zmiti-form-ui{
-       /*  &.questionui-enter-active,
-        &.questionui-leave-active {
-            @include transition(.4s);
-        }
-        
-        &.questionui-leave-to{
-            opacity: 0;
-            @include transform(translate3d(0,80vh,0));
-        } */
-    }
-
-    @at-root.zmiti-zipcode{
-        @include pos(a);
-        width: 300px;
-        left: 30px;
-        top: 40px;
-        z-index: 100;
-    }
-    
-    .zmiti-mobile{
-
-
-
-        &.result-enter-active,
-        &.result-leave-active {
-            @include transition(.4s);
-        }
-        
-        &.result-enter{
-
-            opacity: 0;
-            @include transform(translate3d(-50%,80vh,0));
-        }
-
-       
-
-        @include pos(a);
-        top:24%;
-        width: 580px;
-        left: 50%;
-        @include transform(translate3d(-50%,0,0));
-        color:#b32525;
-        font-weight: bold;
-        .zmiti-input-tip{
-            font-size:40px;
-            margin-bottom: 10px;
-        }
-
-        .zmiti-mobile-tip{
-            margin-top: 20px;
-            font-weight: normal;
-            line-height: 42px;
-            div{
-                text-indent: 2em;
-            }
-        }
-        input{
-            width: 580px;
-            height: 60px;
-            padding:0;
-            border:1px solid #b32525;
-            background: transparent;
-            font-size:30px;
-            text-indent: 20px;
-            color:#b32525;
-        }
-        .zmiti-pass{
-            @include pos(a);
-            top: 70%;
-            padding: 10px 20px;
-            right: 0;
-        }
-        .zmiti-submit-btn{
-            background:#fff;
-            font-size: 40px;
-            width: 250px;
-            padding: 20px 0;
-            text-align: center;
-            @include br(20px);
-            border:1px solid #b32525;
-            margin: 40px auto;
-            &.disabled{
-                background:#f7f7f7;
-                border:2px solid #dcdee2;
-                color:#c5c8ce;
-            }
-            &.active{
-                @include transform(scale(.92) translate3d(0,10px,0));;
-            }
-        }
-    }
-
-
-    .zmiti-result-page{
-        @include displayBox(horizontal);
-        @include pos(r);
-
-         &.result-enter-active,
-        &.result-leave-active {
-            @include transition(.4s);
-        }
-        
-        &.result-leave-to{
-            opacity: 0;
-            @include transform(translate3d(0,-80vh,0));
-        }
-
-
-        .zmiti-result-bg{
-            @include pos(r);
-            width: 590px;
-            height: 700px;
-            margin: 0 auto;
-            .lt-full{
-                color:#fff;
-                height: 590px;
-                top: 70px;
-                @include displayBox(vertical);
-                &>div{
-
-                    width: 360px;
-                    -webkit-box-flex: 1;
-                }
-
-                .zmiti-result-title{
-                    font-size:54px;
-                    color:#fff25c;
-                    width: 500px;
-                    text-align: center;
-                }
-                .zmiti-result-content{
-                    font-size:34px;
-                }
-                .zmiti-result-radio{
-                    font-size: 40px;
-                    text-align: center;
-
-                    div{
-                        @include pos(r);
-                        &:before{
-                            content:"";
-                            @include pos(a);
-                            width: 100%;
-                            height: 2px;
-                            background:rgba(255,255,255,.6);
-                            z-index: 100;
-                            left: 0;
-                            bottom:-30px;
-                        }
-
-                    }
-
-
-                    .zmiti-star-C{
-                        margin-top: 40px;
-                        img{
-                            width: 60px;
-                        }
-
-                        &:before{
-                            display: none;
-                        }
-                    }
-                    span{
-                        font-weight: bold;
-                        font-family: Georgia;
-                        font-size: 50px;
-                    }
-                }
-            }
-            &>img{
-                @include pos(a);
-            }
-        }
-        .zmiti-get{
-            @include pos(a);
-            bottom: -100px;
-        }
-        .zmiti-passed{
-            @include pos(a);
-            width: 300px;
-            top: -100px;
-            right: -90px;
-            z-index: 0;
-        }
-        @at-root.zmiti-result-btns{
-            @include pos(a);
-            @include displayBox(horizontal);
-            bottom:-180px;
-            right:30px;
-            div{
-                width: 100px;
-                margin: 0 20px;
-
-                &.active{
-                    @include transform(scale(.92) translate3d(0,4px,0));;
-                }
-            }
-        }
-    }
-
-
-    .zmiti-modal-C{
-        z-index: 103;
-        &.modal-enter-active,
-        &.modal-leave-active {
-            @include transition(.4s .6s);
-        }
-        &.modal-leave-active{
-            
-            @include transition(.4s);
-        }
-        
-        .zmiti-tip{
-            background:rgba(0,0,0,.6);
-            @include displayBox(horizontal);
-            z-index: 1029;
-        }
-
-        &.modal-leave-to,
-        &.modal-enter {
-            opacity: 0;
-        }
-
-
-        .flash{
-            @include animation(flash 1s infinite alternate);
-        }
-        .zmiti-modal-list{
-            height: 100vh;
-            ul{
-                perspective: 500px;
-                -webkit-perspective: 500px;
-                @include pos(r);
-               
-              
-                li{
-                    width: $viewW;
-                    text-align: center;
-                    $bottom:320px;
-
-                    @include displayBox(vertical);
-                    
-                    .zmiti-main-person{
-                        @include pos(r);
-                        @include displayBox(horizontal);
-                        height: 280px;
-
-                        img{
-                            @include br();
-                            box-shadow: 0 10px 20px  rgba(0,0,0,.6);                  
-                        }
-                        ///width: 80%;
-
-                        margin: 130px auto 0;
-                        div.zmiti-name{
-                            margin-left: 20px;
-                            text-align: left;
-                            font-size:28px;
-                            span{
-                                font-weight: normal;
-                                font-size:28px;
-                                color:#000;
-                            }
-                            div{
-                                font-size:32px;
-                            }
-                        }
-                        .zmiti-headimgurl{
-                            width: 240px;
-                            img{
-                            }
-
-                        }
-                        h2{
-                            color:#c32121;
-                            font-size: 44px;
-                            @include pos(r);
-                            padding: 10px 0;
-                            margin: 10px 0;
-                            &:before{
-                                content:"";
-                                @include pos(a);
-                                width: 100%;
-                                height: 1px;
-                                background:#8a8a8a;
-                                left: 0;
-                                bottom:0;
-                            }
-                        }
-                    }
-
-                    .zmiti-main-question{
-                        background:#e4e4e4;
-                        -webkit-box-flex: 1;
-                        border:1px solid #9e9e9e;
-                        width: 720px;
-                        margin: 50px auto 16px;
-                        @include displayBox(vertical);
-                        .zmiti-trans-question{
-                            &.question-enter-active,
-                            &.question-leave-active {
-                                @include transition(.4s);
-                            }
-
-                            &.question-leave-to,
-                            &.question-enter {
-                                @include transform(translate3d(-$viewW,0,0));
-                            }
-
-                            &.question1-enter-active {
-                                @include transition(.4s .5s);
-                            }
-
-                            &.question1-leave-to,
-                            &.question1-enter {
-                                @include transform(translate3d($viewW,0,0));
-                            }
-
-                        }
-                        .zmiti-question-img{
-                            width: 500px;
-                            margin: 20px auto;
-                        }
-                        .zmiti-question-title{
-                            font-weight: bold;
-                            @include pos(r);
-                            font-size:32px;
-                            width: 610px;
-                            margin: 0 auto;
-
-                            padding-bottom:30px;
-                            &:before{
-                                content:'';
-                                @include pos(a);
-
-                                width: 620px;;
-                                height: 1px;
-                                background:#4e4e4e;
-                                bottom: 0;
-                                left:0px;
-                            }
-                        }
-                        .zmiti-answer-C{
-                            margin: 20px auto 25px;
-                            width: 700px;;
-                            background:#e4e4e4;
-                            .zmiti-answer-item{
-                                background:#fff;
-                                width: 90%;
-                                margin: 20px auto;
-                                line-height: 70px;
-                                height: 70px;
-                                font-size:32px;
-                                @include pos(r);
-                                &.active{
-                                    @include transform(scale(.95) translate3d(0,4px,0));;
-                                }
-                                &:before{
-                                    content:"";
-                                    @include pos(a);
-                                    width: 100%;
-                                    height: 100%;
-                                    left: 0;
-                                    top: 0;
-                                    box-shadow:5px 5px 5px rgba(0,0,0,.4);
-                                };
-
-                                &.error{
-                                  &:before{
-                                    content:"";
-                                    width: 100%;
-                                    height: 100%;;
-                                    left: 0;
-                                    @include pos(a);
-                                    top: 0;
-                                    @include animation(error .2s linear 3);
-                                  };
-                                }
-
-
-                                @-webkit-keyframes error{
-                                    to{
-                                        box-shadow:0 0 20px rgba(255,0,0,.5),0 0 20px rgba(255,0,0,.5) inset;
-                                    }
-                                }
-                                .zmiti-result{
-                                    @include pos(a);
-                                    width: 70px;
-                                    right: 20px;
-
-                                    top: 10px;
-                                }
-                            }
-                        }
-                        .zmiti-right-remark{
-                            h2{
-                                text-align: left;
-//                                text-indent: 20px;
-                            }
-                            div{
-                                width: 680px;
-                                margin: 20px auto;
-                                text-align: left;
-                                text-indent: 2em;
-                                font-size:34px;
-                            }
-
-                            .zmiti-next-btn{
-                                @include pos(a);
-                                bottom:70px;
-                                width: 250px;
-                                background:#fff;
-                                color:#c32121;
-                                font-weight: bold;
-                                font-size: 40px;
-                                padding:20px 0;
-                                @include br(40px);
-                                left: 50%;
-                                margin-left: -125px;
-                                &.active{
-                                    @include transform(scale(.92) translate3d(0,4px,0));;
-                                }
-                            }
-                        }
-                    }
-                    
-                     @include pos(a);
-                     @include transform(rotateY(0) translate3d(0, 0, 0px));
-
-                     &.left {
-                         opacity: .7;
-                         //@include transform(scale(.7) translate3d(-$viewW/1.5, 0, 0));
-                         @include transform(translate3d(-$viewW, 0, 0px) rotateY(0deg) scale(.7));
-
-                     }
-
-                     &.transition {
-                         @include transition(.4s);
-                     }
-
-                     &.left1 {
-                         opacity: 0;
-                         //@include transition_transform(.4s);
-                         //@include transform(scale(.7) translate3d(-5.66667rem, 0, 0));
-                         @include transform(translate3d(-$viewW, 0, 0px) rotateY(0deg));
-                     }
-
-                     &.right {
-                         opacity: .7;
-                         @include transform(translate3d($viewW, 0, 0px) rotateY(0deg) scale(.7));
-                     }
-
-                     &.right1 {
-                         opacity: 0;
-                         // @include transition_transform(.4s .22s);
-                         @include transform(translate3d($viewW, 0, 0px) rotateY(-90deg));
-                     }
-
-                     &.active {
-                         @include transform(rotateY(0) translate3d(0, 0, 0px));
-                         z-index: 100;
-                     }
-                }
-            }
-            
-
-            .zmiti-ar{
-                @include pos(a);
-                $size:40px;
-                width: $size;
-                height: $size;
-                //border:8px solid #f3c664;
-                //@include transform(rotate(45deg));
-                border-right: none;
-                border-top: none;
-                left: 140px;;
-                bottom:600px;
-            }
-            .zmiti-ar-r{
-                ///include transform(rotate(225deg));
-                left: auto;
-                right: 140px;
-            }
-
-            .zmiti-tip{
-                @include pos(a);
-                top: 860px;
-                width: 360px;
-                left: 50%;
-                margin-left: -180px;;
-                text-align: center;
-
-                .zmiti-create-wish{
-                    width: 360px;
-                    img{
-                        width:400px;
-                        margin-left: -20px;;
-                    }
-                }
-            }
-        }
-    }
-    
-   
-     
-
+    z-index: 100;
 }
 
-@media all and (max-height:1109px) {
-    .zmiti-question-img{
-        width: 350px  !important;
-        margin: 10px auto !important;
+.zmiti-index-icon {
+    @include transform3d;
+
+    div {
+        @include pos(a);
+
+        width: 100px;
+        height: 100px;
+        left: 50%;
+        top: 50%;
+        margin-left: -50px;
+        margin-top: -50px;
+
+        /*  */
+        img {
+            //@include animation(rotateY1 8s linear infinite);
+       
+        }
     }
-    .zmiti-result-btns{
-        bottom:-100px;
+
+    @include animation(rotateY 2s linear infinite);
+}
+
+@-webkit-keyframes rotateY {
+    to {
+        -webkit-transform: rotateY(360deg);
     }
-     .zmiti-right-remark{
-        h2{
-            text-align: left;
-        }
-        div{
-            width: 680px;
-            margin: 20px auto;
-            text-align: left;
-            text-indent: 2em;
-            font-size:34px;
-        }
-        }
+}
+
+@-webkit-keyframes rotateY1 {
+    to {
+        -webkit-transform: rotateY(-360deg);
+    }
+}
+
+.zmiti-index-ui {
+    width: 420px;
+    height: 300px;
+
+    @include pos(a);
+
+    left: 50%;
+    top: 50%;
+    margin: 0px 0 0 -210px;
+
+    &.loading-enter-active,
+    &.loading-leave-active {
+        @include transition(0.4s 0.2s);
+    }
+
+    &.loading-leave-to,
+    &.loading-enter {
+        opacity: 0;
+    }
+
+    .zmiti-progress {
+        color: #fff;
+        text-align: center;
+        margin: 20px 0;
+        font-family: Georgia;
+        font-size: 40px;
+    }
 }
  
+.zmiti-logo {
+    @include pos(a);
 
-@-webkit-keyframes info {
-    from {
-        -webkit-transform: translate3d(0, -30px, 0);
-    }
-
-    to {
-        -webkit-transform: translate3d(0, 0, 0);
-    }
+    width: 500px;
+    bottom: 40px;
+    left: 50%;
+    margin-left: -250px;
 }
-
-@-webkit-keyframes waiting {
-    to {
-        -webkit-transform: rotate(360deg);
-    }
-}
+  
+ @media all and (max-height:1109px){
+     .zmiti-index-main-ui{
+         .zmiti-createimg{
+             //height: 120vh;
+         }
+     }
+ }

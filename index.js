@@ -1,6 +1,6 @@
 import Vue from "vue";
 import './pages/css/index.css';
-import Index from './pages/index1/index';
+import Index from './pages/index/index';
 import Loading from './pages/loading/index';
 import Music from './pages/music/index';
 import Main from './pages/main/index';
@@ -56,8 +56,10 @@ new Vue({
 		
 		*/
 		template: `<div id='app1'>
+		<Music :obserable='obserable'></Music>
 		<Loading :width='width' :obserable='obserable'></Loading>
-		<Index :obserable='obserable'></Index>
+		<Index v-if='show' :obserable='obserable'></Index>
+		<Main v-if='show' :obserable='obserable'></Main>
 	</div>`,
 	methods: {	
 
@@ -129,8 +131,10 @@ new Vue({
 
 		}, () => {
 
+			 
+
 			obserable.trigger({
-				type:'hideloading'
+				type:'hideloading1'
 			});
 			
 			s.show = true;

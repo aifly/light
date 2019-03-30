@@ -1,10 +1,28 @@
 ﻿﻿window.imgs = {
   logo: "./assets/images/logo1.png",
+  play: "./assets/images/play.png",
+  play1: "./assets/images/play1.png",
+  arrow: "./assets/images/arrow.png",
   match: "./assets/images/match.png",
+  match1: "./assets/images/match1.png",
   point: "./assets/images/point.png",
   title: "./assets/images/title.png",
   fm: "./assets/images/fm.png",
-  index:'./assets/images/index.jpg',
+  audio: "./assets/images/audio.png",
+  text1: "./assets/images/text1.png",
+  text2: "./assets/images/text2.png",
+  text3: "./assets/images/text3.png",
+  tip: "./assets/images/tip.png",
+  qrcode: "./assets/images/qrcode.png",
+  candle: "./assets/images/candle.png",
+	bg: "./assets/images/bg.jpg",
+	shadow1: "./assets/images/shadow1.png",
+	share1: "./assets/images/share1.jpg",
+	share2: "./assets/images/share2.jpg",
+	share3: "./assets/images/share3.jpg",
+	shareTitle: "./assets/images/share-title.png",
+	index:'./assets/images/index.jpg',
+	
 };
 
 
@@ -27,26 +45,22 @@ for (var attr in imgs) {
   
 var musics = {
 	music: {
-		src: './assets/music/bg2.mp3',
-		autoplay: false,
+		src: './assets/music/bg1.mp3',
+		autoplay: true,
 		name: 'bg2',
 		loop: true
 	},
-  alert: {
-    src: './assets/music/alert.mp3',
-    autoplay: true,
-    name: 'alert',
-  },
-  error: {
-    src: './assets/music/error.mp3',
-    autoplay: true,
-    name: 'error',
-  },
-  right: {
-    src: './assets/music/right.mp3',
-    autoplay: true,
-    name: 'right',
-  }
+  print: {
+  	src: './assets/music/print.mp3',
+  	autoplay: true,
+  	loop: true,
+  	name: 'print',
+	},
+	 photo: {
+	 	src: './assets/music/photo.mp3',
+	 	autoplay: true,
+	 	name: 'photo',
+	 }
 };
 
  (function () {

@@ -4,18 +4,13 @@
     z-index: 1200;
     background: #000;
 
-    @at-root.zmiti-fm{
-        @include pos(a);
-        width: 100px;
-        left: 50px;
-        top: 50px;
-    }
+    
 
     .zmiti-index-title{
         @include pos(a);
         width: 240px;
         top: 10vh;
-        left: 100px;;
+        left: 100px;
     }
 
     .zmiti-text{

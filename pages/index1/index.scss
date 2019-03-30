@@ -1,8 +1,192 @@
 ﻿@import "../css/base.scss";
 
-.zmiti-index1 {
+.zmiti-index-main-ui {
     z-index: 1200;
     background: #000;
+
+    .candle {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 150px;
+        z-index: 120;
+
+        .zmiti-candle-body {
+            width: 150px;
+        }
+    }
+
+    /* 火焰 */
+    .candle-flame {
+        @include animation(flicker 3s infinite ease-out alternate);
+
+        background-image: -webkit-radial-gradient(ellipse at 5px 20px, rgba(75, 95, 124, 0), hsla(0, 0%, 100%, 0.5), #fff);
+        background-image: radial-gradient(ellipse at 5px 20px, rgba(75, 95, 124, 0), hsla(0, 0%, 100%, 0.5), #fff);
+        border-radius: 37% 37% 34% 34%/70% 70% 33% 33%;
+        box-shadow: 0 -8px 8px 4px #fff, 0 -15px 15px 12px #ff0, 0 -15px 0 14px #f00;
+        width: 40px;
+        height: 80px;
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        right: 0;
+        top: -24px;
+        margin: auto;
+        transform-origin: center bottom;
+        filter: blur(3px);
+    }
+    .zmiti-share-page{
+        &:before {
+            content: '';
+
+            @include pos(a);
+            width: 100%;
+            height: 100%;
+            z-index: 10000;;
+
+
+            background: rgba(0, 0, 0, 0.5);
+
+            @include transform(translateZ(100px));
+
+            background-image: -webkit-radial-gradient(rgba(225, 225, 225, 0.1), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 1));
+
+            @include animation(light 4s 1s linear  forwards);
+        }
+        .lt-full{   
+            opacity:0;
+
+            @include animation(opacity 3s 1s linear  forwards);
+        }
+
+        .zmiti-share-title{
+             width: 240px;
+             top: 10vh;
+             left: 100px;
+             @include pos(a);
+        }
+        .zmiti-share-text{
+            @include pos(a);
+            width: 400px;
+            right: 40px;
+            top: 33vh;
+
+        }
+        .zmiti-share-audio{
+            @include pos(a);
+            width: 70px;
+            top: 300px;
+            right: 100px;
+
+        }
+        .zmiti-qrcode{
+            @include pos(a);
+            right: 20px;
+            bottom:20px;
+        }
+        .zmiti-share-pv{
+            color:#643013;
+            font-weight: bold;
+            @include pos(a);
+            bottom:40px;
+            left: 40px;
+            font-size:34px;
+            z-index: 10;;
+            span{
+                font-family: Georgia;
+                font-size:50px;
+            }
+        }
+    }
+
+    @-webkit-keyframes light {
+        to {
+            @include transform(translate3d(0, 0, 10px) scale(10));
+           opacity: 0;
+        }
+    }
+    @-webkit-keyframes opacity {
+        to {
+            opacity: 1;
+        }
+    }
+    .out .candle-flame {
+        display: none;
+    }
+
+    @-webkit-keyframes flicker {
+        0% {
+            transform: scale(1);
+        }
+
+        20% {
+            transform: scale(1.1, 0.9) rotate(3deg);
+        }
+
+        50% {
+            transform: scale(1, 1.2);
+        }
+
+        80% {
+            transform: scale(0.9, 1.1) rotate(-3deg);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .candle-smoke {
+        position: absolute;
+        left: 50%;
+        top: -15px;
+        transform-origin: bottom center;
+        transform: scale(0.5);
+        filter: blur(3px);
+        opacity: 0;
+    }
+
+    .out .candle-smoke {
+        animation: smokeOut 30s both;
+    }
+
+    @-webkit-keyframes smokeOut {
+        10% {
+            opacity: 1;
+        }
+
+        0%,
+        100% {
+            opacity: 0;
+        }
+    }
+
+    .candle-smoke {
+        position: absolute;
+        left: 50%;
+        top: -15px;
+        transform-origin: bottom center;
+        transform: scale(0.5);
+        filter: blur(3px);
+        opacity: 0;
+    }
+
+    .out .candle-smoke {
+        animation: smokeOut 30s both;
+    }
+
+    @-webkit-keyframes smokeOut {
+        10% {
+            opacity: 1;
+        }
+
+        0%,
+        100% {
+            opacity: 0;
+        }
+    }
 }
 
 .zmiti-time {
@@ -15,7 +199,9 @@
 
 .zmiti-match {
     width: 300px;
+
     @include pos(a);
+
     z-index: 101;
     left: 100px;
 
@@ -25,17 +211,19 @@
 
     .candle-flame {
         width: 0px;
-        height:0px;
+        height: 0px;
         bottom: -90%;
         left: -85%;
         right: 0;
-        opacity:0;
-       
-        &.active{
-            @include transition(.4s .1s);
-            opacity:1;
+        opacity: 0;
+
+        &.active {
+            @include transition(0.4s 0.1s);
+
+            opacity: 1;
             width: 30px;
             height: 60px;
+
             @include transform(scale(1));
         }
     }
@@ -43,159 +231,12 @@
 
 .zmiti-canvas {
     @include pos(a);
+
     left: 0;
     top: 0;
     z-index: 100;
-
 }
 
-.candle {
-    position: absolute;
-    bottom: 40px;
-    left: 0;
-    right: 0;
-    width: 40px;
-    margin: auto;
-    z-index: 100;
-    ;
-}
-
-.candle-body {
-    width: 40px;
-    height: 120px;
-    background-color: #E90018;
-    border-radius: 0 0 40px 40px/0 0 16px 16px;
-    box-shadow: inset 8px 0 12px rgba(0, 0, 0, 0.1), inset -8px 0 12px rgba(0, 0, 0, 0.1);
-    position: relative;
-}
-
-.candle-body::before {
-    content: '';
-    position: absolute;
-    height: 16px;
-    border-radius: 50%;
-    background-color: #EF4D65;
-    top: -8px;
-    left: 0;
-    right: 0;
-    box-shadow: inset 0 0 20px #E90018, inset 0 0 5px rgba(0, 0, 0, 0.2), 0 1px rgba(0, 0, 0, 0.05), inset 0 2px 3px rgba(0, 0, 0, 0.4);
-}
-
-/* 蜡烛芯 */
-.candle-body::after {
-    content: '';
-    display: block;
-    width: 4px;
-    height: 20px;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: -20px;
-    margin: auto;
-    background: #fff;
-    background-image: linear-gradient(to bottom, #311, #edd3d1 70%, #edd3d1);
-    border-radius: 0 0 4px 4px/0 0 2px 2px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
-}
-
-/* 火焰 */
-.candle-flame {
-    @include animation(flicker 3s infinite ease-out alternate);
-    background-image: -webkit-radial-gradient(ellipse at 5px 20px, rgba(75, 95, 124, 0), hsla(0, 0%, 100%, 0.5), #fff);
-    background-image: radial-gradient(ellipse at 5px 20px, rgba(75, 95, 124, 0), hsla(0, 0%, 100%, 0.5), #fff);
-    border-radius: 37% 37% 34% 34%/70% 70% 33% 33%;
-    box-shadow: 0 -8px 8px 4px #fff, 0 -15px 15px 12px #ff0, 0 -15px 0 14px #f00;
-    width: 10px;
-    height: 20px;
-    position: absolute;
-    bottom: 100%;
-    left: 0;
-    right: 0;
-    top: -24px;
-    margin: auto;
-    transform-origin: center bottom;
-    filter: blur(2px);
-}
-
-.out .candle-flame {
-    display: none;
-}
-
-@-webkit-keyframes flicker {
-    0% {
-        transform: scale(1);
-    }
-
-    20% {
-        transform: scale(1.1, 0.9) rotate(3deg);
-    }
-
-    50% {
-        transform: scale(1, 1.2);
-    }
-
-    80% {
-        transform: scale(0.9, 1.1) rotate(-3deg);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-.candle-smoke {
-    position: absolute;
-    left: 50%;
-    top: -15px;
-    transform-origin: bottom center;
-    transform: scale(0.5);
-    filter: blur(3px);
-    opacity: 0;
-}
-
-.out .candle-smoke {
-    animation: smokeOut 30s both;
-
-
-
-}
-
-@-webkit-keyframes smokeOut {
-    10% {
-        opacity: 1;
-    }
-
-    0%,
-    100% {
-        opacity: 0;
-    }
-}
-
- .candle-smoke {
-     position: absolute;
-     left: 50%;
-     top: -15px;
-     transform-origin: bottom center;
-     transform: scale(0.5);
-     filter: blur(3px);
-     opacity: 0;
- }
-
- .out .candle-smoke {
-     animation: smokeOut 30s both;
- }
-
- @-webkit-keyframes smokeOut {
-     10% {
-         opacity: 1;
-     }
-
-     0%,
-     100% {
-         opacity: 0;
-     }
- }
- 
 .zmiti-index-icon {
     @include transform3d;
 
@@ -212,6 +253,7 @@
         /*  */
         img {
             //@include animation(rotateY1 8s linear infinite);
+       
         }
     }
 
@@ -260,7 +302,6 @@
 }
 
 .zmiti-news {
-
     &.news-enter-active,
     &.news-leave-active {
         @include transition(0.4s);
