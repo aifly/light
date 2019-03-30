@@ -53,6 +53,10 @@
 						type:'pauseVoice',
 						data:'print'
 					});
+
+					setTimeout(() => {
+						this.entryMain();
+					}, 4000);
 				}
 			
 				

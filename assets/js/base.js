@@ -12,7 +12,8 @@
   text1: "./assets/images/text1.png",
   text2: "./assets/images/text2.png",
   text3: "./assets/images/text3.png",
-  tip: "./assets/images/tip.png",
+  tip: "./assets/images/tip1.png",
+  hand: "./assets/images/hand.png",
   qrcode: "./assets/images/qrcode.png",
   candle: "./assets/images/candle.png",
 	bg: "./assets/images/bg.jpg",
@@ -45,7 +46,7 @@ for (var attr in imgs) {
   
 var musics = {
 	music: {
-		src: './assets/music/bg1.mp3',
+		src: './assets/music/bg2.mp3',
 		autoplay: true,
 		name: 'bg2',
 		loop: true

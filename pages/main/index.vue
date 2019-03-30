@@ -1,12 +1,10 @@
 <template>
 	<transition name='loading'>
-		<section v-if='show'  class="lt-full zmiti-index-main-ui" @touchmove='touchmove' :style="{background:'url('+imgs.bg+') no-repeat center center ',backgroundSize:'cover'}" >
+		<section v-if='show'  class="lt-full zmiti-index-main-ui"  @touchstart='touchstart' @touchend='touchend' @touchmove='touchmove' :style="{background:'url('+imgs.bg+') no-repeat center center ',backgroundSize:'cover'}" >
 			<div class='lt-full'>
-				<div class='zmiti-fm'>
-					<img :src="imgs.fm" alt="">
-				</div>
+				
 				<transition name='match'>
-					<div class='zmiti-match' v-if='showMatch' :class='{"transition":matchMoved}' :style="matchStyle"  @touchstart='touchstart' @touchend='touchend' >
+					<div class='zmiti-match' v-if='showMatch' :class='{"transition":matchMoved}' :style="matchStyle"  >
 						<img :src="imgs[showFlame?'match1':'match']" alt="">
 						<div class="candle-flame" :class="{'active':showFlame}"></div>
 					</div>
@@ -14,10 +12,12 @@
 
 				<transition name='tip'>
 					<div class="zmiti-tip " v-if='!showCandle'>
-						
 						<img :src="imgs.tip" alt="">
-						
-						
+					</div>
+				</transition>
+				<transition name='tip'>
+					<div class="zmiti-tip zmiti-hand active" v-if='!showCandle'>
+						<img :src="imgs.hand" alt="">
 					</div>
 				</transition>
 
@@ -42,6 +42,9 @@
 
 
 				<div class='zmiti-share-page lt-full'  ref='page' :style="{width:viewW+'px',height:viewH+'px',WebkitFilter:'blur('+(createImg?'10px':0)+')',background:'url('+imgs['share'+(randomIndex+1)]+') no-repeat center bottom ',backgroundSize:'cover'}" :class='{"active":showSharePage,"hideShadow":hideShadow}'  >
+					<div class='zmiti-fm'>
+						<img :src="imgs.fm" alt="">
+					</div>
 					<div class='lt-full'>
 						<img :src="imgs.shadow1" alt="">
 					</div>
@@ -51,7 +54,7 @@
 					<div class='zmiti-share-text'>
 						<img :src="imgs['text'+(randomIndex+1)]" alt="">
 					</div>
-					<div class='zmiti-share-audio'>
+					<div class='zmiti-share-audio' v-if='!hideShadow'>
 						<img :src="imgs.audio" alt="">
 					</div>
 
@@ -175,6 +178,7 @@
 				this.disY = this.startY - parseFloat(this.matchStyle.top);
 				this.matchStyle.zIndex = 0;
 
+
 			},
 			touchmove(e){
 				if(!this.canMove ||this.showCandle ){
@@ -201,6 +205,9 @@
 
 			},
 			touchend(e){
+				if(this.createImg){
+					return;
+				}
 				this.canMove = false;
 				this.matchStyle.zIndex = 101;
 				this.showCandle = true;
@@ -224,7 +231,7 @@
 								this.html2img();
 							}, 4000);
 						}, 3000);
-					}, 500);
+					}, 1500);
 				},1000);
 			},
 			imgStart(e){

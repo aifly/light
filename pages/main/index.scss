@@ -3,6 +3,17 @@
 .zmiti-index-main-ui {
     z-index: 1200;
     background: #000;
+    .zmiti-hand{
+        &.active{
+            @include animation(hand 1s 6 );
+        }
+    }
+
+    @-webkit-keyframes hand{
+        to{
+            transform:translate(60px,0);
+        }
+    }
     .zmiti-tip{
         @include pos(a);
         top: 650px;
@@ -310,7 +321,7 @@
     width: 300px;
 
     &.transition{
-        @include transition(.4s);
+        @include transition(1.4s);
     }
     &.match-enter-active,
     &.match-leave-active {

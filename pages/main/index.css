@@ -43,6 +43,17 @@
   /* 火焰 */
 }
 
+.zmiti-index-main-ui .zmiti-hand.active {
+  -webkit-animation: hand 1s 6;
+  animation: hand 1s 6;
+}
+
+@-webkit-keyframes hand {
+  to {
+    transform: translate(60px, 0);
+  }
+}
+
 .zmiti-index-main-ui .zmiti-tip {
   position: absolute;
   top: 650px;
@@ -361,8 +372,8 @@
 }
 
 .zmiti-match.transition {
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
+  -webkit-transition: 1.4s;
+  transition: 1.4s;
 }
 
 .zmiti-match.match-enter-active, .zmiti-match.match-leave-active {
