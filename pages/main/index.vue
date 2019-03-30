@@ -205,7 +205,7 @@
 
 			},
 			touchend(e){
-				if(this.createImg){
+				if(this.createImg ||this.showCandle){
 					return;
 				}
 				this.canMove = false;
