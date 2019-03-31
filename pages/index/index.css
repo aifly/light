@@ -42,6 +42,15 @@
   background: #000;
 }
 
+.zmiti-index.index-enter-active, .zmiti-index.index-leave-active {
+  -webkit-transition: 1.4s 0.1s;
+  transition: 1.4s 0.1s;
+}
+
+.zmiti-index.index-leave-to, .zmiti-index.index-enter {
+  opacity: 0;
+}
+
 .zmiti-index .zmiti-index-title {
   position: absolute;
   width: 240px;

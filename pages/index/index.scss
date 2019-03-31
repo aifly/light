@@ -4,6 +4,17 @@
     z-index: 1200;
     background: #000;
 
+
+    &.index-enter-active,
+    &.index-leave-active {
+        @include transition(1.4s 0.1s);
+    }
+
+    &.index-leave-to,
+    &.index-enter {
+        opacity: 0;
+    }
+
     
 
     .zmiti-index-title{

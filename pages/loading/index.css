@@ -41,6 +41,15 @@
   background: #000;
 }
 
+.zmiti-loading1.loading-enter-active, .zmiti-loading1.loading-leave-active {
+  -webkit-transition: 2s 0.1s;
+  transition: 2s 0.1s;
+}
+
+.zmiti-loading1.loading-leave-to, .zmiti-loading1.loading-enter {
+  opacity: 0;
+}
+
 .zmiti-fm {
   position: absolute;
   width: 100px;
@@ -88,15 +97,6 @@
   left: 50%;
   top: 40%;
   margin: 0px 0 0 -210px;
-}
-
-.zmiti-loading-ui.loading-enter-active, .zmiti-loading-ui.loading-leave-active {
-  -webkit-transition: 0.4s 0.2s;
-  transition: 0.4s 0.2s;
-}
-
-.zmiti-loading-ui.loading-leave-to, .zmiti-loading-ui.loading-enter {
-  opacity: 0;
 }
 
 .zmiti-loading-ui .zmiti-progress {

@@ -3,6 +3,16 @@
 .zmiti-loading1 {
     z-index: 12100;
     background: #000;
+
+    &.loading-enter-active,
+    &.loading-leave-active {
+        @include transition(2s 0.1s);
+    }
+
+    &.loading-leave-to,
+    &.loading-enter {
+        opacity: 0;
+    }
 }
 @at-root.zmiti-fm {
     @include pos(a);
@@ -56,15 +66,7 @@
     top: 40%;
     margin: 0px 0 0 -210px;
 
-    &.loading-enter-active,
-    &.loading-leave-active {
-        @include transition(0.4s 0.2s);
-    }
-
-    &.loading-leave-to,
-    &.loading-enter {
-        opacity: 0;
-    }
+  
 
     .zmiti-progress {
         color: #d1b17a;

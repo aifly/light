@@ -1,16 +1,18 @@
 <template>
-	<section v-if='show' class="lt-full zmiti-index" v-tap='[entryMain]' :style="{background:'url('+imgs.index+') no-repeat center bottom',backgroundSize:'cover'}" >
-		<div class='zmiti-fm'>
-			<img :src="imgs.fm" alt="">
-		</div>
+	<transition name='index'>
+		<section v-if='show' class="lt-full zmiti-index" v-tap='[entryMain]' :style="{background:'url('+imgs.index+') no-repeat center bottom',backgroundSize:'cover'}" >
+			<div class='zmiti-fm'>
+				<img :src="imgs.fm" alt="">
+			</div>
 
-		<div class='zmiti-index-title'>
-			<img :src="imgs.title" alt="">
-		</div>
-		<div class='zmiti-text'>
-			{{text}}
-		</div>
-	</section>
+			<div class='zmiti-index-title'>
+				<img :src="imgs.title" alt="">
+			</div>
+			<div class='zmiti-text'>
+				{{text}}
+			</div>
+		</section>
+	</transition>
 </template>
 
 <script>
@@ -34,9 +36,10 @@
 		
 		methods:{
 			entryMain(){
+				this.show = false;
 				this.obserable.trigger({
 					type:'showMain'
-				})
+				});
 			}
 		},
 		mounted(){

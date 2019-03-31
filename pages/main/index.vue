@@ -142,6 +142,7 @@
 					zIndex:101
 					
 				};
+				this.light = true;
 				this.showSharePage = false;
 				this.createImg = '';
 				this.showMatch = true;
@@ -150,7 +151,9 @@
 				this.showMask = false;
 				this.showFlame = false;
 				this.showCandle = false;
-				this.light = false;
+				setTimeout(()=>{
+					this.light = false;
+				},100)
 				this.randomIndex = Math.random()*3|0;
 
 
@@ -181,7 +184,7 @@
 
 			},
 			touchmove(e){
-				if(!this.canMove ||this.showCandle ){
+				if(!this.canMove ||this.showCandle || this.light ){
 					return;
 				}
 				var e = e.changedTouches[0];
@@ -205,7 +208,7 @@
 
 			},
 			touchend(e){
-				if(this.createImg ||this.showCandle){
+				if(this.createImg ||this.showCandle || this.light){
 					return;
 				}
 				this.canMove = false;
@@ -266,6 +269,8 @@
 						}
                         console.log(dt);
                     });
+
+ 
 			},
 			getPv(){
 				return;
