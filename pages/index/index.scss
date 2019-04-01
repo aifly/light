@@ -7,7 +7,7 @@
 
     &.index-enter-active,
     &.index-leave-active {
-        @include transition(1.4s 0.1s);
+        @include transition(2s 0.1s);
     }
 
     &.index-leave-to,
@@ -27,11 +27,14 @@
     .zmiti-text{
         @include pos(a);
         color:#fff;
-        width: 400px;
-        right: 40px;
+        width: 440px;
+        right: 20px;
         text-indent: 2em;
-        top: 30vh;
-        line-height: 60px;;
+        top: 22vh;
+        line-height: 70px;;
+        &>div{
+            height: 50px;
+        }
     }
 }
 

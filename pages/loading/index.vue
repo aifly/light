@@ -63,9 +63,16 @@
 
 			
 			this.obserable.on('hideloading1',()=>{
-				this.loaded = true;
-				this.showLoading = false;
-				this.show = false;
+				setTimeout(() => {
+					this.loaded = true;
+					this.showLoading = false;
+					this.show = false;
+					setTimeout(() => {
+						this.obserable.trigger({
+							type:'showMainPage'
+						})
+					}, 500);
+				}, 1000);
 			});
 			
 

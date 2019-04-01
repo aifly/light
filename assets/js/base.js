@@ -37,16 +37,29 @@ for (var attr in imgs) {
 }
 
  window.config = {
-   baseUrl: "https://testxlive.xinhuaapp.com",
-   host:"https://xlive.xinhuaapp.com", //正式域名：https://testxlive.xinhuaapp.com
-   secretKey: "e9469538b0623783f38c585821459454",
-   text: "清明是中华民族古老的节日，既是一个扫墓祭祖的肃穆节日，也是人们亲近自然、踏青游玩、享受春天乐趣的欢乐节日。"
+	audio1:'./assets/music/audio1.mp3',
+	audio2:'./assets/music/audio2.mp3',
+	audio3:'./assets/music/audio3.mp3',
+   	baseUrl: "https://testxlive.xinhuaapp.com",
+   	host:"https://xlive.xinhuaapp.com", //正式域名：https://testxlive.xinhuaapp.com
+   	secretKey: "e9469538b0623783f38c585821459454",
+   	text: [
+	   '他们',
+	   '用鲜血和生命为共和国奠基',
+	   '以奉献与牺牲为人民谋福祉',
+	   '',
+	   '清明节',
+	   '让我们',
+	   '点一盏灯',
+	   '让英雄丰碑矗立心中',
+	   '让英雄精神薪火相传'
+   ]
  };
  
   
 var musics = {
 	music: {
-		src: './assets/music/bg2.mp3',
+		src: './assets/music/bg3.mp3',
 		autoplay: true,
 		name: 'bg2',
 		loop: true

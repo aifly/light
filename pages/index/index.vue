@@ -9,7 +9,9 @@
 				<img :src="imgs.title" alt="">
 			</div>
 			<div class='zmiti-text'>
-				{{text}}
+				<div v-for="(t,i) in text" :key="i">
+					{{t}}
+				</div>
 			</div>
 		</section>
 	</transition>
@@ -28,7 +30,7 @@
 				viewW:Math.min(window.innerWidth,750),
 				viewH:window.innerHeight,
 				show:true,
-				text:''
+				text:[]
 			}
 		},
 		components:{
@@ -45,27 +47,45 @@
 		mounted(){
 			var iNow = 0;
 			var {obserable} = this;
-			obserable.trigger({
-				type:'playVoice',
-				data:'print'
-			});
-			var t = setInterval(()=>{
-				if(iNow>=window.config.text.length){
-					clearInterval(t);
-					obserable.trigger({
-						type:'pauseVoice',
-						data:'print'
-					});
+			var i =0;
 
-					setTimeout(() => {
-						this.entryMain();
-					}, 4000);
-				}
-			
+			obserable.on('showMainPage',()=>{
+
+				obserable.trigger({
+					type:'playVoice',
+					data:'print'
+				});
+				var t = setInterval(()=>{
+
+					
+					if(iNow>=window.config.text.length){
+						clearInterval(t);
+						obserable.trigger({
+							type:'pauseVoice',
+							data:'print'
+						});
+	
+						setTimeout(() => {
+							this.entryMain();
+						}, 4000);
+						return;
+					}
+					if(i>=window.config.text[iNow].length){
+						iNow++;
+						i = 0;
+					}else{
+						i++;
+						this.text[iNow] = window.config.text[iNow].substring(0,i);
+						this.text = this.text.concat([]);
+					}
+
 				
-				this.text = window.config.text.substring(0,iNow);
-				iNow++;
-			},120);
+					
+					//this.text = window.config.text.substring(0,iNow);
+					//iNow++;
+				},160);
+			})
+
 
 
 		}

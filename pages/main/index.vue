@@ -40,6 +40,11 @@
 					</div>
 				</transition>
 
+				<div class='zmiti-share-audio flash' v-show='showAudio' v-tap='[playAudio]'>
+					<img :src="imgs.audio" alt="">
+					<audio :src='audios[randomIndex]' ref='audio'></audio>
+				</div>
+
 
 				<div class='zmiti-share-page lt-full'  ref='page' :style="{width:viewW+'px',height:viewH+'px',WebkitFilter:'blur('+(createImg?'10px':0)+')',background:'url('+imgs['share'+(randomIndex+1)]+') no-repeat center bottom ',backgroundSize:'cover'}" :class='{"active":showSharePage,"hideShadow":hideShadow}'  >
 					<div class='zmiti-fm'>
@@ -54,9 +59,7 @@
 					<div class='zmiti-share-text'>
 						<img :src="imgs['text'+(randomIndex+1)]" alt="">
 					</div>
-					<div class='zmiti-share-audio' v-if='!hideShadow'>
-						<img :src="imgs.audio" alt="">
-					</div>
+					
 
 					<div class='zmiti-qrcode' v-if='!showCandle'>
 						<img :src="imgs.qrcode" alt="">
@@ -100,6 +103,7 @@
 			return{
 				imgs:window.imgs,
 				className:"",
+				showAudio:false,
 				pv:1234,
 				showSharePage:false,
 				matchMoved:false,
@@ -113,6 +117,7 @@
 				canMove:false,
 				points:[],
 				randomIndex:0,
+				audios:[window.config.audio1,window.config.audio2,window.config.audio3],
 				showMatch:true,
 				showMask:false,
 				showFlame:false,
@@ -135,6 +140,16 @@
 		
 		methods:{
 
+
+			playAudio(){
+				this.$refs['audio'].play();
+				this.$refs['audio'].addEventListener('ended',()=>{
+					setTimeout(() => {
+						this.html2img();
+					}, 1000);
+				})
+			},	
+
 			restart(){
 				this.matchStyle={
 					left:'200px',
@@ -151,6 +166,7 @@
 				this.showMask = false;
 				this.showFlame = false;
 				this.showCandle = false;
+				this.showAudio = false;
 				setTimeout(()=>{
 					this.light = false;
 				},100)
@@ -230,9 +246,8 @@
 
 						setTimeout(() => {
 							this.showCandle = false;
-							setTimeout(() => {
-								this.html2img();
-							}, 4000);
+							this.showAudio = true;
+							 
 						}, 3000);
 					}, 1500);
 				},1000);
@@ -296,6 +311,9 @@
 					//this.showLoading = true;
 					var ref = 'page';
 					var dom = this.$refs[ref];
+
+
+					this.showAudio = false;
 
 					html2canvas(dom,{
 						useCORS: true,

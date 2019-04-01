@@ -5,7 +5,7 @@
     background: #000;
     .zmiti-hand{
         &.active{
-            @include animation(hand 1s 6 );
+            @include animation(hand 1s infinite );
         }
     }
 
@@ -73,6 +73,21 @@
         transform-origin: center bottom;
         filter: blur(3px);
     }
+    .zmiti-share-audio {
+        @include pos(f);
+        width: 70px;
+        top: 200px;
+        right: 100px;
+        z-index: 10022;
+        @include animation(flash 1s infinite alternate);
+        ;
+    }
+
+    @-webkit-keyframes flash{
+        to{
+            @include transform(scale(1.2));
+        }
+    }
     .zmiti-share-page{
         z-index: 99;
         opacity:0;
@@ -135,13 +150,7 @@
             top: 23vh;
 
         }
-        .zmiti-share-audio{
-            @include pos(a);
-            width: 70px;
-            top: 200px;
-            right: 100px;
-
-        }
+        
         .zmiti-qrcode{
             @include pos(a);
             right: 20px;

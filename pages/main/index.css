@@ -44,8 +44,8 @@
 }
 
 .zmiti-index-main-ui .zmiti-hand.active {
-  -webkit-animation: hand 1s 6;
-  animation: hand 1s 6;
+  -webkit-animation: hand 1s infinite;
+  animation: hand 1s infinite;
 }
 
 @-webkit-keyframes hand {
@@ -113,6 +113,23 @@
   filter: blur(3px);
 }
 
+.zmiti-index-main-ui .zmiti-share-audio {
+  position: fixed;
+  width: 70px;
+  top: 200px;
+  right: 100px;
+  z-index: 10022;
+  -webkit-animation: flash 1s infinite alternate;
+  animation: flash 1s infinite alternate;
+}
+
+@-webkit-keyframes flash {
+  to {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+  }
+}
+
 .zmiti-index-main-ui .zmiti-share-page {
   z-index: 99;
   opacity: 0;
@@ -177,13 +194,6 @@
   width: 400px;
   right: 20px;
   top: 23vh;
-}
-
-.zmiti-index-main-ui .zmiti-share-page .zmiti-share-audio {
-  position: absolute;
-  width: 70px;
-  top: 200px;
-  right: 100px;
 }
 
 .zmiti-index-main-ui .zmiti-share-page .zmiti-qrcode {
