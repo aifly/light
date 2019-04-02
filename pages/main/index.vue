@@ -34,7 +34,7 @@
 						</div>
 						<div class='zmiti-share-audio ' v-show='showAudio' v-tap='[playAudio]'>
 							<img :src="imgs.audio" alt="">
-							<audio :src='audios[randomIndex]' ref='audio'></audio>
+							
 						</div>
 					</div>
 				</transition>
@@ -183,15 +183,24 @@
 
 
 			playAudio(){
-				this.$refs['audio'].play();
+
 				
-				this.$refs['audio'].addEventListener('play',()=>{
-					this.obserable.trigger({
-						type:"toggleBgMusic",
-						data:false
-					}); 
-				})
-				this.$refs['audio'].addEventListener('ended',()=>{
+
+				var {obserable} = this;
+
+
+				
+				var audio = obserable.trigger({
+					type:'playVoice',
+					data:'audio'+(this.randomIndex+1)
+				});
+
+				this.obserable.trigger({
+					type:"toggleBgMusic",
+					data:false
+				});
+				
+				audio &&audio.addEventListener('ended',()=>{
 					
 					setTimeout(() => {
 						this.html2img();
@@ -273,7 +282,7 @@
 				this.matchStyle.left = left + 'px';
 				this.matchStyle.top = top + 'px';
 				var s = this;
-				for(var i = 0;i<200;i++){
+				for(var i = 0;i<160;i++){
 					var p = new Point({
 						img:s.$refs['point'],
 						context:s.context,
@@ -309,7 +318,9 @@
 						setTimeout(() => {
 							//this.showCandle = false;
 							this.showAudio = true;
-							 
+							setTimeout(()=>{
+								this.playAudio();
+							},100)
 						}, 3000);
 					}, 1500);
 				},1000);

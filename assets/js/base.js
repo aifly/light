@@ -83,6 +83,21 @@ var musics = {
 	 	src: './assets/music/photo.mp3',
 	 	autoplay: true,
 	 	name: 'photo',
+	 },
+	 audio1: {
+	 	src: './assets/music/audio1.mp3',
+	 	autoplay: true,
+	 	name: 'audio1',
+	 },
+	 audio2: {
+	 	src: './assets/music/audio2.mp3',
+	 	autoplay: true,
+	 	name: 'audio2',
+	 },
+	 audio3: {
+	 	src: './assets/music/audio3.mp3',
+	 	autoplay: true,
+	 	name: 'audio3',
 	 }
 };
 

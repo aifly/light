@@ -76,12 +76,15 @@
 
 			obserable.on('playVoice',(key)=>{
 
+				var audioObj  = null;
+
 				this.audios.forEach((audio,i)=>{
 					if(i>0 ){
 						if(audio.name === key){
-							this.$refs['music'][i].currentTime = 0;
-							this.$refs['music'][i].muted = false;//取消静音
-							this.$refs['music'][i].play();
+							audioObj = this.$refs['music'][i];
+							audioObj.currentTime = 0;
+							audioObj.muted = false;//取消静音
+							audioObj.play();
 						}else{
 							this.$refs['music'][i].currentTime = 0;
 							this.$refs['music'][i].muted = true;//取消静音
@@ -89,13 +92,16 @@
 						}
 					}
 				})
+				return audioObj;
 			})
 
 			obserable.on('pauseVoice',(key)=>{
-
+				var audioObj = null;
 				this.audios.forEach((audio,i)=>{
 					if(i>0 ){
+
 						if(audio.name === key){
+							audioObj = this.$refs['music'][i];
 							this.$refs['music'][i].currentTime = 0;
 							
 							this.$refs['music'][i].pause();
@@ -103,6 +109,8 @@
 						}
 					}
 				})
+
+				return audioObj;
 			})
 
 			obserable.on('setPlay', (data) => {

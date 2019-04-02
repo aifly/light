@@ -1,6 +1,6 @@
 <template>
 	<transition name='index'>
-		<section v-if='show' class="lt-full zmiti-index" v-tap='[entryMain]' :style="{background:'url('+imgs.index+') no-repeat center bottom',backgroundSize:'cover'}" >
+		<section v-if='show' class="lt-full zmiti-index"  :style="{background:'url('+imgs.index+') no-repeat center bottom',backgroundSize:'cover'}" >
 			<div class='zmiti-fm'>
 				<img :src="imgs.fm" alt="">
 			</div>
