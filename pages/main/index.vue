@@ -5,7 +5,7 @@
 			<div class='lt-full' ref='page1' :style="{WebkitFilter:'blur('+(createImg?'10px':0)+')'}">
 
 				<div class='zmiti-fm'>
-					<img :src="imgs.fm" alt="">
+					<img :src="imgs.fm1" alt="">
 				</div>
 				<transition name='title'>
 					<div class='zmiti-title' v-if='light'>
@@ -21,9 +21,12 @@
 					<img :src="imgs.bottom" alt="">
 					
 				</div>
+				<div class='zmiti-qrcode' v-if='showQrcode'>
+					<img :src="imgs.qrcode" alt="">
+				</div>
 				<transition name='xi'>
 					<div class='zmiti-xi1' v-if='light'>
-						<img :src="imgs.xi1" alt="">
+						<img :src="imgs['text'+(randomIndex+1)]" alt="">
 						<div class='zmiti-deng'>
 							<img :src="imgs.ran" alt="">
 							<span>{{pv}}</span>
@@ -31,7 +34,7 @@
 						</div>
 						<div class='zmiti-share-audio ' v-show='showAudio' v-tap='[playAudio]'>
 							<img :src="imgs.audio" alt="">
-							<audio :src='audios[0]' ref='audio'></audio>
+							<audio :src='audios[randomIndex]' ref='audio'></audio>
 						</div>
 					</div>
 				</transition>
@@ -41,7 +44,7 @@
 				</div>
 
 				<transition name='match' >
-					<div class='zmiti-match' v-if='showMatch' :class='{"transition":matchMoved}' :style="matchStyle"  >
+					<div class='zmiti-match' v-if='showMatch && !showTip' :class='{"transition":matchMoved}' :style="matchStyle"  >
 						<img :src="imgs[showFlame?'match1':'match']" alt="">
 						<div class="candle-flame" :class="{'active':showFlame}"></div>
 					</div>
@@ -70,7 +73,7 @@
 				<transition name='candle' >
 					<div class="candle " :class="{'out':!light,'light':light}" >
 						<div class="zmiti-candle-body">
-							<img :src="imgs.candle" alt="">
+							<img :src="imgs[showQrcode?'candle':'candle']" alt="">
 						</div>
 						<!-- 火焰 -->
 						<div class="candle-flame"></div>
@@ -141,6 +144,7 @@
 				className:"",
 				showAudio:false,
 				pv:1234,
+				showQrcode:false,
 				showSharePage:false,
 				matchMoved:false,
 				viewW:Math.min(window.innerWidth,750),
@@ -180,18 +184,30 @@
 
 			playAudio(){
 				this.$refs['audio'].play();
+				
+				this.$refs['audio'].addEventListener('play',()=>{
+					this.obserable.trigger({
+						type:"toggleBgMusic",
+						data:false
+					}); 
+				})
 				this.$refs['audio'].addEventListener('ended',()=>{
+					
 					setTimeout(() => {
 						this.html2img();
 					}, 1000);
+					this.obserable.trigger({
+						type:"toggleBgMusic",
+						data:true
+					}); 
 				})
 			},	
 
 			restart(){
 				this.matchStyle={
 					left:'200px',
-					top:'400px',
-					zIndex:101
+					top:window.innerHeight*.6+'px',
+					zIndex:201
 					
 				};
 				this.light = true;
@@ -204,6 +220,7 @@
 				this.showFlame = false;
 				this.showCandle = false;
 				this.showAudio = false;
+				this.showQrcode = false;
 				setTimeout(()=>{
 					this.light = false;
 				},100)
@@ -352,6 +369,7 @@
 
 				//document.title = '开始截图....'
 				this.hideShadow = true;
+				this.showQrcode = true;
 				setTimeout(()=>{
 					//this.showLoading = true;
 					var dom = this.$refs[ref];
@@ -383,6 +401,9 @@
 			this.getPv();
 			this.obserable.on('showMain',()=>{
 				
+				setTimeout(()=>{
+					this.showTip = false;
+				},4000)
 				this.loaded = true;
 				this.show = true;
 				setTimeout(() => {
@@ -391,13 +412,15 @@
 					var s = this;
 					(function render(){
 						(window.requestAnimationFrame || window.webkitRequestAnimationFrame)(render);
-						s.context.clearRect(0,0,s.viewW,s.viewH);
+						if(!s.light){
+							s.context.clearRect(0,0,s.viewW,s.viewH);
 
-						s.points.forEach((item,i)=>{
-							item.animate(()=>{
-								s.points.splice(i,1);
-							});
-						})
+							s.points.forEach((item,i)=>{
+								item.animate(()=>{
+									s.points.splice(i,1);
+								});
+							})
+						}
 					
 					})();
 				}, 10);

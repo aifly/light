@@ -63,9 +63,9 @@
 
     .zmiti-xi1 {
         @include pos(a);
-        width: 500px;
+        width: 600px;
         left: 50%;
-        margin-left: -250px;
+        margin-left: -300px;
         bottom: 340px;
 
         z-index: 210;
@@ -104,6 +104,12 @@
         z-index: 110;
         
     }
+    .zmiti-qrcode{
+        @include pos(a);
+        right: 20px;
+        bottom:20px;
+        z-index: 377;
+    }   
     .zmiti-tip{
         @include pos(a);
         bottom: 250px;
@@ -122,9 +128,9 @@
         }
     }
      .zmiti-hand {
-         width: 160px;
+         width: 100px;
          bottom: 330px;
-          margin-left: -100px;
+         margin-left: -70px;
           ;
          &.active {
              @include animation(hand 1s infinite);
@@ -185,7 +191,7 @@
     }
     .zmiti-share-audio {
         @include pos(a);
-        width: 70px;
+        width: 40px;
 
         
         top: 120%;
@@ -266,11 +272,7 @@
 
         }
         
-        .zmiti-qrcode{
-            @include pos(a);
-            right: 20px;
-            bottom:20px;
-        }
+        
         .zmiti-share-pv{
             color:#643013;
             font-weight: bold;
