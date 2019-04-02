@@ -1,35 +1,74 @@
 <template>
 	<transition name='loading'>
 		<section v-if='show'  class="lt-full zmiti-index-main-ui"  @touchstart='touchstart' @touchend='touchend' @touchmove='touchmove' :style="{background:'url('+imgs.bg+') no-repeat center center ',backgroundSize:'cover'}" >
-			<div class='lt-full'>
-				
-				<transition name='match'>
+
+			<div class='lt-full' ref='page1' :style="{WebkitFilter:'blur('+(createImg?'10px':0)+')'}">
+
+				<div class='zmiti-fm'>
+					<img :src="imgs.fm" alt="">
+				</div>
+				<transition name='title'>
+					<div class='zmiti-title' v-if='light'>
+						<img :src="imgs.title" alt="">
+					</div>
+				</transition>
+
+				<div class='zmiti-top' :class='{"active":light}' :style="{background:'url('+imgs.topBg+') no-repeat center bottom',backgroundSize:'cover'}">
+					<img :src="imgs.bei" alt="">
+				</div>
+
+				<div class='zmiti-bottom'>
+					<img :src="imgs.bottom" alt="">
+					
+				</div>
+				<transition name='xi'>
+					<div class='zmiti-xi1' v-if='light'>
+						<img :src="imgs.xi1" alt="">
+						<div class='zmiti-deng'>
+							<img :src="imgs.ran" alt="">
+							<span>{{pv}}</span>
+							<img :src="imgs.deng" alt="">
+						</div>
+						<div class='zmiti-share-audio ' v-show='showAudio' v-tap='[playAudio]'>
+							<img :src="imgs.audio" alt="">
+							<audio :src='audios[0]' ref='audio'></audio>
+						</div>
+					</div>
+				</transition>
+
+				<div class='zmiti-candles'>
+					<img :src="imgs.candles" alt="" />
+				</div>
+
+				<transition name='match' >
 					<div class='zmiti-match' v-if='showMatch' :class='{"transition":matchMoved}' :style="matchStyle"  >
 						<img :src="imgs[showFlame?'match1':'match']" alt="">
 						<div class="candle-flame" :class="{'active':showFlame}"></div>
 					</div>
 				</transition>
 
-				<transition name='tip'>
-					<div class="zmiti-tip " v-if='!showCandle'>
-						<img :src="imgs.tip" alt="">
-					</div>
-				</transition>
-				<transition name='tip'>
-					<div class="zmiti-tip zmiti-hand active" v-if='!showCandle'>
-						<img :src="imgs.hand" alt="">
-					</div>
-				</transition>
+				<div  v-if='showTip'>
+					<transition name='tip'>
+						<div class="zmiti-tip " v-if='!showCandle' >
+							<img :src="imgs.tip" alt="">
+						</div>
+					</transition>
+					<transition name='tip'>
+						<div class="zmiti-tip zmiti-hand active" v-if='!showCandle'>
+							<img :src="imgs.hand" alt="">
+						</div>
+					</transition>
+				</div>
 
-				<canvas class='zmiti-canvas' :width="viewW" :height="viewH" ref='canvas'>
+				<canvas v-show='!light' class='zmiti-canvas' :width="viewW" :height="viewH" ref='canvas'>
 
 				</canvas>
 
 				<img ref='point' style='position:fixed;left:-100px;opacity:0;z-index:-1;' :src="imgs.point" alt="">
 
 				
-				<transition name='candle'>
-					<div class="candle " v-if='showCandle' :class="{'out':!light}" >
+				<transition name='candle' >
+					<div class="candle " :class="{'out':!light,'light':light}" >
 						<div class="zmiti-candle-body">
 							<img :src="imgs.candle" alt="">
 						</div>
@@ -40,13 +79,10 @@
 					</div>
 				</transition>
 
-				<div class='zmiti-share-audio flash' v-show='showAudio' v-tap='[playAudio]'>
-					<img :src="imgs.audio" alt="">
-					<audio :src='audios[randomIndex]' ref='audio'></audio>
-				</div>
+				
 
 
-				<div class='zmiti-share-page lt-full'  ref='page' :style="{width:viewW+'px',height:viewH+'px',WebkitFilter:'blur('+(createImg?'10px':0)+')',background:'url('+imgs['share'+(randomIndex+1)]+') no-repeat center bottom ',backgroundSize:'cover'}" :class='{"active":showSharePage,"hideShadow":hideShadow}'  >
+				<div class='zmiti-share-page lt-full' v-if='false'  ref='page' :style="{width:viewW+'px',height:viewH+'px',WebkitFilter:'blur('+(createImg?'10px':0)+')',background:'url('+imgs['share'+(randomIndex+1)]+') no-repeat center bottom ',backgroundSize:'cover'}" :class='{"active":showSharePage,"hideShadow":hideShadow}'  >
 					<div class='zmiti-fm'>
 						<img :src="imgs.fm" alt="">
 					</div>
@@ -70,20 +106,20 @@
 					</div>
 				</div>
 
-				<transition name='createimg'>
-					<div class='lt-full zmiti-createimg' v-if='createImg' :style="{width:viewW*.7+'px',height:viewH*.7+70+'px'}">
-						<div class='zmiti-img' >
-							<img :src="createImg" alt="">
-						</div>
-						<div>
-							<div v-tap='[restart]'>再点一次</div>
-							<div v-tap='[showMaskPage]'>邀请好友点灯</div>
-						</div>
-
-						<div class='zmiti-create-tip'>长按保存图片</div>
-					</div>
-				</transition>
 			</div>
+			<transition name='createimg'>
+				<div class='lt-full zmiti-createimg' v-if='createImg' :style="{width:viewW*.7+'px',height:viewH*.7+70+'px'}">
+					<div class='zmiti-img' >
+						<img :src="createImg" alt="">
+					</div>
+					<div>
+						<div v-tap='[restart]'>再点一次</div>
+						<div v-tap='[showMaskPage]'>邀请好友点灯</div>
+					</div>
+
+					<div class='zmiti-create-tip'>长按保存图片</div>
+				</div>
+			</transition>
 			<div class='zmiti-mask' v-if='showMask' @touchstart='showMask = false'>
 				<img :src="imgs.arrow" alt="">
 			</div>
@@ -124,14 +160,15 @@
 				showCandle:false,
 				createImg:'',
 				hideShadow:false,
+				showTip:true,
 				matchStyle:{
 					left:'200px',
-					top:'400px',
-					zIndex:101
+					top:window.innerHeight*.6+'px',
+					zIndex:201
 					
 				},
-				imgWidth:300,
-				imgHeight:217,
+				imgWidth:200,
+				imgHeight:145,
 				last:200
 			}
 		},
@@ -187,7 +224,12 @@
 			},
 
 			touchstart(e){
+				
 				e.preventDefault();
+				if(this.showTip){
+					this.showTip = false;
+					return;
+				}
 				this.canMove = true;
 				var e = e.changedTouches[0];
 				this.startX = e.pageX;
@@ -195,7 +237,7 @@
 
 				this.disX = this.startX - parseFloat(this.matchStyle.left);
 				this.disY = this.startY - parseFloat(this.matchStyle.top);
-				this.matchStyle.zIndex = 0;
+				//this.matchStyle.zIndex = 0;
 
 
 			},
@@ -209,6 +251,8 @@
 			
 				var left = this.endX - this.disX;
 				var top = this.endY - this.disY;
+				
+				top = Math.max(this.viewH - 640,top);
 				this.matchStyle.left = left + 'px';
 				this.matchStyle.top = top + 'px';
 				var s = this;
@@ -227,8 +271,9 @@
 				if(this.createImg ||this.showCandle || this.light){
 					return;
 				}
+
 				this.canMove = false;
-				this.matchStyle.zIndex = 101;
+				this.matchStyle.zIndex = 201;
 				this.showCandle = true;
 				this.showFlame = true;
 
@@ -236,7 +281,7 @@
 					this.matchMoved = true;
 					this.matchStyle = {
 						left:'350px',
-						top:this.viewH - 232 - this.imgHeight + 'px',
+						top:this.viewH - 145 - this.imgHeight + 'px',
 					}
 
 					setTimeout(() => {
@@ -245,7 +290,7 @@
 						this.showSharePage = true;
 
 						setTimeout(() => {
-							this.showCandle = false;
+							//this.showCandle = false;
 							this.showAudio = true;
 							 
 						}, 3000);
@@ -301,7 +346,7 @@
                         console.log(dt);
                     });
 			},
-			html2img(){
+			html2img(ref = 'page1'){
 				var s = this;
 				var {obserable} = this;
 
@@ -309,9 +354,7 @@
 				this.hideShadow = true;
 				setTimeout(()=>{
 					//this.showLoading = true;
-					var ref = 'page';
 					var dom = this.$refs[ref];
-
 
 					this.showAudio = false;
 
@@ -339,6 +382,7 @@
 			this.updatePv();
 			this.getPv();
 			this.obserable.on('showMain',()=>{
+				
 				this.loaded = true;
 				this.show = true;
 				setTimeout(() => {
@@ -354,10 +398,11 @@
 								s.points.splice(i,1);
 							});
 						})
+					
 					})();
 				}, 10);
 			});
-
+		
 			this.randomIndex = Math.random()*3|0;
 
 		}

@@ -3,22 +3,113 @@
 .zmiti-index-main-ui {
     z-index: 1119;
     background: #000;
-    .zmiti-hand{
-        &.active{
-            @include animation(hand 1s infinite );
-        }
-    }
+   
 
     @-webkit-keyframes hand{
         to{
             transform:translate(60px,0);
         }
     }
+
+    .lt-full{
+        .zmiti-title{
+            @include pos(a);
+            z-index: 200;
+            right: 40px;
+            top: 100px;
+            &.title-enter-active,
+            &.title-leave-active {
+                @include transition(5s);
+            }
+
+            &.title-leave-to,
+            &.title-enter {
+                opacity: 0;
+            }
+
+
+        }
+    }
+
+    .zmiti-top{
+        @include pos(a);
+        left: 0;
+        filter: grayscale(100%);
+        -webkit-filter: grayscale(100%);
+        height: 50%;
+        &.active{
+            @include transition(10s);
+            filter: grayscale(0%);
+            -webkit-filter: grayscale(0%);
+        }
+        img{
+            margin-top: 10vh;
+        }
+    }
+
+    .zmiti-candles{
+        @include pos(a);
+        z-index: 200;
+        width: 100%;
+        bottom: 0;
+        left: 0;;
+    }
+    @-webkit-keyframes grayscale{
+        to{
+            -webkit-filter: grayscale(0);
+            filter: grayscale(0);
+        }
+    }
+
+    .zmiti-xi1 {
+        @include pos(a);
+        width: 500px;
+        left: 50%;
+        margin-left: -250px;
+        bottom: 340px;
+
+        z-index: 210;
+        &.xi-enter-active,
+        &.xi-leave-active {
+            @include transition(1s 3s);
+        }
+
+        &.xi-leave-to,
+        &.xi-enter {
+            opacity: 0;
+        }
+        .zmiti-deng {
+            @include pos(a);
+            color: #fff;
+            width: 500px;
+            text-align: right;
+    
+            img {
+                height: 24px;
+                width: auto;
+            }
+    
+            span {
+                font-family: Georgia;
+                font-size: 50px;
+            }
+        }
+    }
+
+    .zmiti-bottom{
+        @include pos(a);
+        bottom: -10vh;
+        left: 0;
+        width: 100%;
+        z-index: 110;
+        
+    }
     .zmiti-tip{
         @include pos(a);
-        top: 650px;
+        bottom: 250px;
         width: 300px;
         left: 50%;
+        z-index: 301;
         margin-left: -150px;;
         &.tip-enter-active,
         &.tip-leave-active {
@@ -30,14 +121,33 @@
             opacity: 0;
         }
     }
+     .zmiti-hand {
+         width: 160px;
+         bottom: 330px;
+          margin-left: -100px;
+          ;
+         &.active {
+             @include animation(hand 1s infinite);
+         }
+     }
     .candle {
         position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
         margin: auto;
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
         width: 150px;
-        z-index: 1003;
+        
+        z-index: 113;
+
+        &.light{
+            @include transition(10s);
+            -webkit-filter: grayscale(0);
+            filter: grayscale(0);
+        }
+
         &.candle-enter-active,
         &.candle-leave-active {
             @include transition(0.4s);
@@ -74,12 +184,17 @@
         filter: blur(3px);
     }
     .zmiti-share-audio {
-        @include pos(f);
+        @include pos(a);
         width: 70px;
-        top: 200px;
-        right: 100px;
+
+        
+        top: 120%;
+       
+        left: 0px;
+        @include transform(rotateY(180deg));
         z-index: 10022;
-        @include animation(flash 1s infinite alternate);
+        ///@include animation(flash 1s infinite alternate);
+
         ;
     }
 
@@ -327,7 +442,7 @@
 }
 
 .zmiti-match {
-    width: 300px;
+    width: 200px;
 
     &.transition{
         @include transition(1.4s);
@@ -343,7 +458,7 @@
     }
     @include pos(a);
 
-    z-index: 101;
+    z-index:301;
     left: 100px;
 
     img {
@@ -375,7 +490,7 @@
 
     left: 0;
     top: 0;
-    z-index: 100;
+    z-index: 300;
 }
 
 .zmiti-index-icon {
@@ -455,6 +570,15 @@
      .zmiti-index-main-ui{
          .zmiti-createimg{
              //height: 120vh;
+         }
+     }
+ }
+
+
+ @media all and (min-height:1448px){
+     .zmiti-index-main-ui{
+         .zmiti-bottom{
+             bottom: 0vh;
          }
      }
  }

@@ -2,8 +2,8 @@
 	<div  class="lt-full zmiti-music-main-ui" :style='{height:"10vh"}'>
 		<audio ref='music' :key="i" v-for='(audio,i) in audios' :src='audio.src' :autoplay="audio.autoplay" :loop="audio.loop"></audio>
 
-		<div  @click='toggleMusic' class='zmiti-play' :class='{"":rotate}' :style="playStyle">
-			<img  :src='imgs[rotate?"play":"play1"]'/>
+		<div  @click='toggleMusic' class='zmiti-play' :class='{"active":rotate}' :style="playStyle">
+			<img  :src='imgs.play'/>
 		</div>
 	</div>
 </template>

@@ -41,7 +41,7 @@ export default class Point {
         this.x += this.speedX;
         this.y += this.speedY;
         this.speedY += Math.random() *  10 + 2;
-        if (Math.abs(this.y - this.defaultY > -10)) {
+        if (Math.abs(this.y - this.defaultY > 2)) {
             fn&&fn();
         }
 

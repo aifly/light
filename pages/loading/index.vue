@@ -71,8 +71,8 @@
 						this.obserable.trigger({
 							type:'showMainPage'
 						})
-					}, 500);
-				}, 1000);
+					}, 500/1);
+				}, 500/1);
 			});
 			
 

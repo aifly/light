@@ -49,6 +49,10 @@
 			var {obserable} = this;
 			var i =0;
 
+			setTimeout(() => {
+				//this.entryMain();
+			}, 100);
+
 			obserable.on('showMainPage',()=>{
 
 				obserable.trigger({
