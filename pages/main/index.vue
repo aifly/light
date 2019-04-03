@@ -194,7 +194,7 @@
 					context.drawImage(this,0,0,canvas.width,canvas.height);
 					var ran = new Image();
 					ran.onload = function(){
-						context.drawImage(this,canvas.width*.4,canvas.height*.7);
+						context.drawImage(this,canvas.width*.36,canvas.height*.7);
 
 						var deng = new Image();
 						deng.onload = function(){
