@@ -1,6 +1,6 @@
 <template>
 	<transition name='loading'>
-		<section v-if='show' class="lt-full zmiti-loading1" :style="{background:'url('+imgs.bg+') no-repeat center center',backgroundSize:'cover'}" >
+		<section v-if='show' class="lt-full zmiti-loading1" :style="{background:'#000 url('+imgs.bg+') no-repeat center center',backgroundSize:'cover'}" >
 			<div class='zmiti-fm'>
 				<img :src="imgs.fm" alt="">
 			</div>
