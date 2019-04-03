@@ -49,29 +49,31 @@
 			var {obserable} = this;
 			var i =0;
 
-			setTimeout(() => {
-				//this.entryMain();
-			}, 100);
+			
 
 			obserable.on('showMainPage',()=>{
 
-				obserable.trigger({
+			/* 	var print = obserable.trigger({
 					type:'playVoice',
 					data:'print'
-				});
-				var t = setInterval(()=>{
+				}); */
 
-					
+				//console.log(print,111);
+				
+			/* 	print.muted = false;
+				print.play(); */
+				var t = setInterval(()=>{
+					print.muted = false;
+				
 					if(iNow>=window.config.text.length){
 						clearInterval(t);
-						obserable.trigger({
+						/* obserable.trigger({
 							type:'pauseVoice',
 							data:'print'
-						});
-	
+						}); */
 						setTimeout(() => {
 							this.entryMain();
-						}, 4000);
+						}, 2000);
 						return;
 					}
 					if(i>=window.config.text[iNow].length){
@@ -87,7 +89,7 @@
 					
 					//this.text = window.config.text.substring(0,iNow);
 					//iNow++;
-				},160);
+				},120);
 			})
 
 

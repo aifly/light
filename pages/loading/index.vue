@@ -1,16 +1,18 @@
 <template>
 	<transition name='loading'>
-		<section v-if='show' class="lt-full zmiti-loading1" >
+		<section v-if='show' class="lt-full zmiti-loading1" :style="{background:'url('+imgs.bg+') no-repeat center center',backgroundSize:'cover'}" >
 			<div class='zmiti-fm'>
 				<img :src="imgs.fm" alt="">
 			</div>
 			<div class='zmiti-loading-ui' v-if='!loaded && showLoading' >
-				<div class='zmiti-progress'>
-					<span>为英烈点燃一盏灯</span>{{parseInt(width*100)}}%
+				<div class='zmiti-progress' :style="{WebkitTransform:'translateX('+width*360+'px)'}">
+					<img :src="imgs.fire" alt=""><span>{{parseInt(width*100)}}%</span>
 				</div>
 				<div class='zmiti-loading-C'>
 					<div class='zmiti-loading-bar '  :style="{webkitTransform:'scale('+(width)+',1)'}">  </div>
 				</div>
+
+				<div>为英烈点燃一盏灯</div>
 				
 			</div>
 		</section>
@@ -60,8 +62,6 @@
 		},
 		mounted(){
 			
-
-			
 			this.obserable.on('hideloading1',()=>{
 				setTimeout(() => {
 					this.loaded = true;
@@ -71,8 +71,8 @@
 						this.obserable.trigger({
 							type:'showMainPage'
 						})
-					}, 500/1);
-				}, 500/1);
+					},1000/1);
+				}, 1000/1);
 			});
 			
 

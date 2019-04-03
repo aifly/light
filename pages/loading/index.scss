@@ -57,14 +57,14 @@
 }
 
 .zmiti-loading-ui {
-    width: 420px;
+    width: 520px;
     height: 300px;
 
     @include pos(a);
 
     left: 50%;
     top: 40%;
-    margin: 0px 0 0 -210px;
+    margin: 0px 0 0 -260px;
 
   
 
@@ -74,28 +74,39 @@
         margin: 20px 0;
         font-family: Georgia;
         font-size: 40px;
+        @include transform(translateX(0px));
+        @include pos(a);
+        top: -114px;
+        
         span{
-            font-size:30px;
+            @include pos(r);
+            top: 20px;
             margin-right: 40px;
+        }
+        img{
+            width: 60px;
         }
     }
 }
 
 .zmiti-loading-C{
-    border:1px solid #d1b17a;
-    padding: 4px;
+    border:2px solid #fff;
+    @include br(30px);
+    padding: 10px;
     box-sizing: border-box;
 }
 .zmiti-loading-bar {
     /*  background-image:repeating-linear-gradient(-45deg, #14c3a2, #14c3a2 30px, #22e8c3 30px, #22e8c3 60px);
      background-size:600px 100%;
      @include animation(barberpole 12s linear infinite); */
-    height: 40px;
+    height: 30px;
     width: 100%;
+    @include br(30px);
 
     @include transformOrigin(left);
 
     background: #d1b17a;
+    background:-webkit-linear-gradient(top, #ffffdb, #ffff00);
     position: relative;
 
 }

@@ -6,32 +6,30 @@
 	match1: "./assets/images/match1.png",
 	point: "./assets/images/point.png",
 	title: "./assets/images/title.png",
-	top: "./assets/images/top.jpg",
-	topBg:'./assets/images/top-bg.jpg',
-	bei: "./assets/images/bei.png",
 
-	bottom: "./assets/images/bottom.png",
+	poster1: "./assets/images/poster-1.png",
+	poster2: "./assets/images/poster-2.png",
+	poster3: "./assets/images/poster-3.png",
 	ran: "./assets/images/ran.png",
 	deng: "./assets/images/deng.png",
 	fm: "./assets/images/fm.png",
 	fm1: "./assets/images/fm1.png",
 	audio: "./assets/images/audio.png",
+	audio1: "./assets/images/audio.gif",
 	text1: "./assets/images/xi1.png",
 	text2: "./assets/images/xi2.png",
 	text3: "./assets/images/xi3.png",
 	tip: "./assets/images/tip2.png",
 	hand: "./assets/images/hand1.png",
 	qrcode: "./assets/images/qrcode1.png",
+	fire: "./assets/images/fire.png",
 	candles: "./assets/images/candles.png",
+	candles1: "./assets/images/candles1.png",
 	candle: "./assets/images/candle.png",
 	candle1: "./assets/images/candle1.png",
 	bg: "./assets/images/bg.jpg",
-	shadow1: "./assets/images/shadow1.png",
-	share1: "./assets/images/share1.jpg",
-	share2: "./assets/images/share2.jpg",
-	share3: "./assets/images/share3.jpg",
-	shareTitle: "./assets/images/share-title.png",
 	index:'./assets/images/index.jpg',
+	postBg: './assets/images/post-bg.jpg',
 	
 };
 
@@ -48,6 +46,7 @@ for (var attr in imgs) {
  window.config = {
 	audio1:'./assets/music/audio1.mp3',
 	audio2:'./assets/music/audio2.mp3',
+	photo:'./assets/music/photo.mp3',
 	audio3:'./assets/music/audio3.mp3',
    	baseUrl: "https://testxlive.xinhuaapp.com",
    	host:"https://xlive.xinhuaapp.com", //正式域名：https://testxlive.xinhuaapp.com
@@ -68,37 +67,32 @@ for (var attr in imgs) {
   
 var musics = {
 	music: {
-		src: './assets/music/bg3.mp3',
-		autoplay: true,
+		src: './assets/music/bg3_1.mp3',
+		autoplay: 'autoplay',
 		name: 'bg2',
 		loop: true
 	},
-  print: {
-  	src: './assets/music/print.mp3',
-  	autoplay: true,
-  	loop: true,
-  	name: 'print',
-	},
+   
 	 photo: {
 	 	src: './assets/music/photo.mp3',
-	 	autoplay: true,
+	 	autoplay: 'autoplay',
 	 	name: 'photo',
 	 },
-	 audio1: {
+	/*  audio1: {
 	 	src: './assets/music/audio1.mp3',
-	 	autoplay: true,
+	 	autoplay: 'autoplay',
 	 	name: 'audio1',
 	 },
 	 audio2: {
 	 	src: './assets/music/audio2.mp3',
-	 	autoplay: true,
+	 	autoplay: 'autoplay',
 	 	name: 'audio2',
 	 },
 	 audio3: {
 	 	src: './assets/music/audio3.mp3',
-	 	autoplay: true,
+	 	autoplay: 'autoplay',
 	 	name: 'audio3',
-	 }
+	 } */
 };
 
  (function () {

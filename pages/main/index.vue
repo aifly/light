@@ -1,26 +1,21 @@
 <template>
 	<transition name='loading'>
 		<section v-if='show'  class="lt-full zmiti-index-main-ui"  @touchstart='touchstart' @touchend='touchend' @touchmove='touchmove' :style="{background:'url('+imgs.bg+') no-repeat center center ',backgroundSize:'cover'}" >
-
-			<div class='lt-full' ref='page1' :style="{WebkitFilter:'blur('+(createImg?'10px':0)+')'}">
-
-				<div class='zmiti-fm'>
-					<img :src="imgs.fm1" alt="">
-				</div>
+			<div class='zmiti-bg lt-full' :class='{"active":light}' :style="{background:'url('+imgs.postBg+') no-repeat center center',backgroundSize:'cover'}">
 				<transition name='title'>
-					<div class='zmiti-title' v-if='light'>
+					<div class='zmiti-title'>
 						<img :src="imgs.title" alt="">
 					</div>
 				</transition>
-
-				<div class='zmiti-top' :class='{"active":light}' :style="{background:'url('+imgs.topBg+') no-repeat center bottom',backgroundSize:'cover'}">
-					<img :src="imgs.bei" alt="">
+			</div>
+			<div class='lt-full' ref='page1' :style="{WebkitFilter:'blur('+(createImg?'10px':0)+')'}">
+				
+				<div class='zmiti-fm'>
+					<img :src="imgs.fm1" alt="">
 				</div>
+				
 
-				<div class='zmiti-bottom'>
-					<img :src="imgs.bottom" alt="">
-					
-				</div>
+				 
 				<div class='zmiti-qrcode' v-if='showQrcode'>
 					<img :src="imgs.qrcode" alt="">
 				</div>
@@ -33,14 +28,23 @@
 							<img :src="imgs.deng" alt="">
 						</div>
 						<div class='zmiti-share-audio ' v-show='showAudio' v-tap='[playAudio]'>
-							<img :src="imgs.audio" alt="">
+							<img :src="imgs['audio'+(isPlaying?'1':'')]" alt="">
 							
 						</div>
 					</div>
 				</transition>
 
 				<div class='zmiti-candles'>
-					<img :src="imgs.candles" alt="" />
+					<transition name='candles'>
+						<div class='zmiti-candles1' v-if='!light'>
+							<img :src="imgs['candles1']" alt="" />
+						</div>
+					</transition>
+					<transition name='candles'>
+						<div class='zmiti-candles2' v-if='light'>
+							<img :src="imgs['candles']" alt="" />
+						</div>
+					</transition>
 				</div>
 
 				<transition name='match' >
@@ -71,49 +75,26 @@
 
 				
 				<transition name='candle' >
-					<div class="candle " :class="{'out':!light,'light':light}" >
+					<div class="candle ":class="{'out':!light,'light':light}" >
 						<div class="zmiti-candle-body">
-							<img :src="imgs[showQrcode?'candle':'candle']" alt="">
+							<img :src="imgs[showCandle1?'candle1':'candle']" alt="">
 						</div>
 						<!-- 火焰 -->
-						<div class="candle-flame"></div>
+						<div class="candle-flame "  v-if='!showQrcode' ></div>
 						<!-- 烟雾 -->
 						
 					</div>
 				</transition>
 
-				
 
-
-				<div class='zmiti-share-page lt-full' v-if='false'  ref='page' :style="{width:viewW+'px',height:viewH+'px',WebkitFilter:'blur('+(createImg?'10px':0)+')',background:'url('+imgs['share'+(randomIndex+1)]+') no-repeat center bottom ',backgroundSize:'cover'}" :class='{"active":showSharePage,"hideShadow":hideShadow}'  >
-					<div class='zmiti-fm'>
-						<img :src="imgs.fm" alt="">
-					</div>
-					<div class='lt-full'>
-						<img :src="imgs.shadow1" alt="">
-					</div>
-					<div class='zmiti-share-title'>
-						<img :src="imgs.shareTitle" alt="">
-					</div>
-					<div class='zmiti-share-text'>
-						<img :src="imgs['text'+(randomIndex+1)]" alt="">
-					</div>
-					
-
-					<div class='zmiti-qrcode' v-if='!showCandle'>
-						<img :src="imgs.qrcode" alt="">
-					</div>
-
-					<div class='zmiti-share-pv' v-if='!showCandle'>
-						您为英烈点燃了 <span>{{pv}}</span> 盏灯
-					</div>
-				</div>
+				 
 
 			</div>
+			'>
 			<transition name='createimg'>
-				<div class='lt-full zmiti-createimg' v-if='createImg' :style="{width:viewW*.7+'px',height:viewH*.7+70+'px'}">
+				<div class='lt-full zmiti-createimg'  v-if='createImg' :style="{width:Math.min(1234,viewH)/1334*viewH*.5+'px',height:(Math.min(1234,viewH)/1334*viewH*.5/750)*1334+60+'px'}">
 					<div class='zmiti-img' >
-						<img :src="createImg" alt="">
+						<img :src="createImg" alt="" >
 					</div>
 					<div>
 						<div v-tap='[restart]'>再点一次</div>
@@ -126,6 +107,8 @@
 			<div class='zmiti-mask' v-if='showMask' @touchstart='showMask = false'>
 				<img :src="imgs.arrow" alt="">
 			</div>
+			<img ref='ran' :src="imgs.ran" alt=""  :style="{position:'fixed',zIndex:-1,opacity:0,left:'-750px'}">
+			<img ref='deng' :src="imgs.deng" alt="" :style="{position:'fixed',zIndex:-1,opacity:0,left:'-750px'}">
 		</section>
 	</transition>
 </template>
@@ -134,7 +117,7 @@
 	import './index.css';
 	import zmitiUtil from '../lib/util';
 	import Point from '../lib/point';
-	import '../lib/html2canvas';
+	//import '../lib/html2canvas';
 	export default {
 		props:['width','obserable'],
 		name:'zmitiindex',
@@ -144,11 +127,14 @@
 				className:"",
 				showAudio:false,
 				pv:1234,
+				isAndroid:navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1,
 				showQrcode:false,
 				showSharePage:false,
 				matchMoved:false,
 				viewW:Math.min(window.innerWidth,750),
 				viewH:window.innerHeight,
+
+				showCandle1:false,
 				show:false,
 				loaded:false,
 				currentTime:'',
@@ -173,38 +159,92 @@
 				},
 				imgWidth:200,
 				imgHeight:145,
-				last:200
+				last:200,
+				isPlaying:false,
 			}
 		},
 		components:{
+		},
+		watch:{
+			randomIndex(val){
+				this.obserable.trigger({
+					type:'randomAudio',
+					data:val
+				});
+			}
 		},
 		
 		methods:{
 
 
+			imgClick(){
+			},
+
+
+			creatCanvas(){
+
+				var canvas = document.createElement('canvas');
+				var context = canvas.getContext('2d');
+				var s = this;
+				var img = new Image();
+					
+				img.onload = function(){
+					canvas.width  = this.width;
+					canvas.height = this.height;
+					context.drawImage(this,0,0,canvas.width,canvas.height);
+					var ran = new Image();
+					ran.onload = function(){
+						context.drawImage(this,canvas.width*.4,canvas.height*.7);
+
+						var deng = new Image();
+						deng.onload = function(){
+							context.drawImage(this,canvas.width*.7+(s.pv+'').length*25,canvas.height*.7);
+							context.fillStyle = '#fff';
+							context.font="40px Georgia";
+							context.fillText(s.pv,canvas.width*.7,canvas.height*.72);
+							s.createImg = canvas.toDataURL();
+						}
+						deng.src = s.imgs.deng;
+					}
+					ran.src = s.imgs.ran;
+
+
+				}
+				img.src = this.imgs['poster'+(this.randomIndex+1)];
+
+			},
 			playAudio(){
 
 				
 
 				var {obserable} = this;
-
-
-				
 				var audio = obserable.trigger({
-					type:'playVoice',
-					data:'audio'+(this.randomIndex+1)
+					type:'playCusAudio',
+					data:'audio'
 				});
+
+				this.isPlaying = true;
+				
 
 				this.obserable.trigger({
-					type:"toggleBgMusic",
-					data:false
+					type:"setBgVolume",
+					data:0.1
 				});
-				
+				audio.muted = false;
+				audio.play();
 				audio &&audio.addEventListener('ended',()=>{
-					
-					setTimeout(() => {
+					audio.pause();
+					audio.muted = true;
+					this.isPlaying = false;
+					setTimeout(() =>  {
 						this.html2img();
 					}, 1000);
+
+					return;
+					this.obserable.trigger({
+						type:"setBgVolume",
+						data:1
+					});
 					this.obserable.trigger({
 						type:"toggleBgMusic",
 						data:true
@@ -223,8 +263,10 @@
 				this.showSharePage = false;
 				this.createImg = '';
 				this.showMatch = true;
+				this.isPlaying = false;
 				this.hideShadow = false;
 				this.matchMoved = false;
+				this.showCandle1 = false;
 				this.showMask = false;
 				this.showFlame = false;
 				this.showCandle = false;
@@ -234,6 +276,7 @@
 					this.light = false;
 				},100)
 				this.randomIndex = Math.random()*3|0;
+				this.updatePv();
 
 
 			},
@@ -251,7 +294,6 @@
 
 			touchstart(e){
 				
-				e.preventDefault();
 				if(this.showTip){
 					this.showTip = false;
 					return;
@@ -343,18 +385,30 @@
 			updatePv(){
 				var s = this;
 
+                axios.post('http://h5.wenming.cn/v1/wmshare/h5_view/?h5id=ypb-qmj&appsecret=c9GxtUre3kOJCgvp&sign=2', {})
+				.then(function (data) {//sign:2 表示两位数随机
+                        var dt = data.data;
+						if(dt.getret === 0){
+							s.pv = dt.data.num2;
+							console.log(dt)
+							wxHandlercallback('','请为英烈点燃第'+s.pv+'盏灯');
+							
+						}
+                    });
+
+				return;
                 axios.post('http://api.zmiti.com/v2/custom/update_pvnum/?customid=76', {
                     }).then(function (data) {
                         var dt = data.data;
                         if (typeof dt === 'string') {
                             dt = JSON.parse(dt);
                         }
-						console.log(data);
-						if(dt.getret === 0){
-							s.pv = dt.randtotalpv;
+					console.log(data);
+					if(dt.getret === 0){
+						s.pv = dt.randtotalpv;
 
-							wxHandlercallback('','请为英烈点燃第'+s.pv+'盏灯');
-						}
+						wxHandlercallback('','请为英烈点燃第'+s.pv+'盏灯');
+					}
                         console.log(dt);
                     });
 
@@ -367,42 +421,59 @@
                         "secretKey": window.config.secretKey, // 请求秘钥
                         "nm": "light" // 活动某组图片点赞标识 或者活动某组图片浏览量标识 标识由更新接口定义
                     }).then(function (data) {
+                        console.log(data,'11111234');
                         var dt = data.data;
                         if (typeof dt === 'string') {
                             dt = JSON.parse(dt);
                         }
-                        console.log(dt);
                     });
 			},
 			html2img(ref = 'page1'){
 				var s = this;
 				var {obserable} = this;
 
+				window.ss = this;
+
 				//document.title = '开始截图....'
 				this.hideShadow = true;
 				this.showQrcode = true;
+				this.showCandle1 = true;
+				this.showAudio = false;
+
+				obserable.trigger({
+					type:'playVoice',
+					data:'photo'
+				});
+
+				this.creatCanvas();
+
+				return;
+
+				/*  */
+ 
 				setTimeout(()=>{
 					//this.showLoading = true;
 					var dom = this.$refs[ref];
-
-					this.showAudio = false;
-
-					html2canvas(dom,{
+					
+					/* html2canvas(dom,{
 						useCORS: true,
 						onrendered: function(canvas) {
-
-							obserable.trigger({
-								type:'playVoice',
-								data:'photo'
-							});
 					        var src = canvas.toDataURL();
 							//s.mergeImg = '';
 							//s.createImg = src;
+							
+							if(!s.isAndroid){
+								obserable.trigger({
+									type:'playVoice',
+									data:'photo'
+								});
+							}
+							
 							s.createImg = src;
 					      },
 					      width: dom.clientWidth,
 					      height:dom.clientHeight
-					})
+					}) */
 				},100);
 			},
 			
@@ -438,6 +509,7 @@
 			});
 		
 			this.randomIndex = Math.random()*3|0;
+			
 
 		}
 	}
