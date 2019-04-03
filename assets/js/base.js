@@ -10,7 +10,7 @@
 	poster1: "./assets/images/poster-1.png",
 	poster2: "./assets/images/poster-2.png",
 	poster3: "./assets/images/poster-3.png",
-	ran: "./assets/images/ran.png",
+	ran: "./assets/images/ran1.png",
 	deng: "./assets/images/deng.png",
 	fm: "./assets/images/fm.png",
 	fm1: "./assets/images/fm1.png",
