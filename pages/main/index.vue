@@ -194,14 +194,14 @@
 					context.drawImage(this,0,0,canvas.width,canvas.height);
 					var ran = new Image();
 					ran.onload = function(){
-						context.drawImage(this,canvas.width*.36,canvas.height*.7);
+						context.drawImage(this,60,canvas.height*.7);
 
 						var deng = new Image();
 						deng.onload = function(){
-							context.drawImage(this,canvas.width*.7+(s.pv+'').length*25,canvas.height*.7);
+							context.drawImage(this,330+(s.pv+'').length*25,canvas.height*.7);
 							context.fillStyle = '#fff';
 							context.font="40px Georgia";
-							context.fillText(s.pv,canvas.width*.7,canvas.height*.72);
+							context.fillText(s.pv,330,canvas.height*.72);
 							s.createImg = canvas.toDataURL();
 						}
 						deng.src = s.imgs.deng;
@@ -290,6 +290,7 @@
 				var canvas = this.$refs['canvas'];
 				var context = canvas.getContext('2d');
 				this.context = context;
+
 			},
 
 			touchstart(e){
@@ -385,12 +386,12 @@
 			updatePv(){
 				var s = this;
 
-                axios.post('http://h5.wenming.cn/v1/wmshare/h5_view/?h5id=ypb-qmj&appsecret=c9GxtUre3kOJCgvp&sign=3', {})
+                axios.post('http://h5.wenming.cn/v1/wmshare/h5_view/?h5id=ypb-qmj&appsecret=c9GxtUre3kOJCgvp&sign=1', {})
 				.then(function (data) {//sign:2 表示两位数随机
                         var dt = data.data;
 						if(dt.getret === 0){
-							s.pv = dt.data.num2;
-							console.log(dt)
+							s.pv = dt.data.num1;
+							console.log(dt.data)
 							//wxHandlercallback('','请为英烈点燃第'+s.pv+'盏灯');
 							
 						}
@@ -517,8 +518,10 @@
 					})();
 				}, 10);
 			});
-		
-			this.randomIndex = Math.random()*3|0;
+
+
+
+			this.randomIndex = (Math.random()*3)|0;
 			
 
 		}
