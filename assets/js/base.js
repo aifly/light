@@ -1,7 +1,7 @@
 ﻿﻿window.imgs = {
 	logo: "./assets/images/logo1.png",
 	play: "./assets/images/play2.png",
-	arrow: "./assets/images/arrow.png",
+	arrow: "./assets/images/arrow1.png",
 	match: "./assets/images/match.png",
 	match1: "./assets/images/match1.png",
 	point: "./assets/images/point.png",
@@ -10,7 +10,7 @@
 	poster1: "./assets/images/poster-1.png",
 	poster2: "./assets/images/poster-2.png",
 	poster3: "./assets/images/poster-3.png",
-	ran: "./assets/images/ran1.png",
+	ran: "./assets/images/ran2.png",
 	deng: "./assets/images/deng.png",
 	fm: "./assets/images/fm.png",
 	fm1: "./assets/images/fm1.png",

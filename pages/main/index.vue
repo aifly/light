@@ -385,15 +385,25 @@
 			updatePv(){
 				var s = this;
 
-                axios.post('http://h5.wenming.cn/v1/wmshare/h5_view/?h5id=ypb-qmj&appsecret=c9GxtUre3kOJCgvp&sign=2', {})
+                axios.post('http://h5.wenming.cn/v1/wmshare/h5_view/?h5id=ypb-qmj&appsecret=c9GxtUre3kOJCgvp&sign=3', {})
 				.then(function (data) {//sign:2 表示两位数随机
                         var dt = data.data;
 						if(dt.getret === 0){
 							s.pv = dt.data.num2;
 							console.log(dt)
-							wxHandlercallback('','请为英烈点燃第'+s.pv+'盏灯');
+							//wxHandlercallback('','请为英烈点燃第'+s.pv+'盏灯');
 							
 						}
+                    });
+
+ 				axios.post('https://xlive.xinhuaapp.com/xhs-security-activity/activity/num/updateNum', {
+                        "secretKey": window.config.secretKey, // 请求秘钥
+                        "nm": "ypb-qmj" // 
+                    }).then(function (data) {
+                        var dt = data.data;
+                        if (typeof dt === 'string') {
+                            dt = JSON.parse(dt);
+                        }
                     });
 
 				return;
